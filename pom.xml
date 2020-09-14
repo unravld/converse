@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.novelmc</groupId>
+    <artifactId>Coomerce</artifactId>
+    <version>6.9.0-OFFICIAL</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jar.finalName>${project.name}</jar.finalName>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>MM/dd/yyyy HH:mm</maven.build.timestamp.format>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <scm>
+        <connection>scm:git:git@github.com:unravmc/converse.git</connection>
+        <developerConnection>scm:git:git@github.com:unravmc/converse.git</developerConnection>
+        <url>git@github.com:unravmc/converse.git</url>
+    </scm>
+
+    <repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        
+        <repository>
+            <id>CodeMC</id>
+            <url>https://repo.codemc.org/repository/maven-public</url>
+        </repository>
+
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>me.lucko.luckperms</groupId>
+            <artifactId>luckperms-api</artifactId>
+            <version>4.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.14.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.thekeenant</groupId>
+            <artifactId>tabbed</artifactId>
+            <version>v1.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.comphenix.protocol</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>4.5.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.49.Final</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+
+            <!-- Shade -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>net.novelmc</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Git describe -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>validate-the-git-infos</id>
+                        <goals>
+                            <goal>validateRevision</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <prefix>git</prefix>
+                    <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
+                    <verbose>false</verbose>
+                    <format>properties</format>
+                    <failOnNoGitDirectory>true</failOnNoGitDirectory>
+                    <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+                    <includeOnlyProperties>
+                        <includeOnlyProperty>git.commit.id.abbrev</includeOnlyProperty>
+                    </includeOnlyProperties>
+                    <gitDescribe>
+                        <skip>false</skip>
+                        <always>false</always>
+                        <abbrev>7</abbrev>
+                        <dirty>-dirty</dirty>
+                        <match>*</match>
+                    </gitDescribe>
+                </configuration>
+            </plugin>
+
+            <!-- Antrun -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <target>
+                                <propertyfile file="${basedir}/src/main/resources/build.properties"
+                                              comment="Build information. Edit this to your liking.">
+                                    <entry key="buildAuthor" default="unknown"/>
+                                    <entry key="buildNumber" default="0"/>
+                                    <entry key="buildVersion" value="${project.version}"/>
+                                    <entry key="buildDate" value="${timestamp}"/>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <entry key="buildHead" value="${git.commit.id.abbrev}"/>
+                                </propertyfile>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Properties -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${project.basedir}/src/main/resources/build.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Buildnumber -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <buildNumberPropertyName>maven.buildnumber</buildNumberPropertyName>
+                    <buildNumberPropertiesFileLocation>${project.basedir}/src/main/resources/build.properties
+                    </buildNumberPropertiesFileLocation>
+                    <format>{0,number,#}</format>
+                    <items>
+                        <item>buildNumber</item>
+                    </items>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
