@@ -19,7 +19,7 @@ public class PlayerOrganizer {
     Team voter;
     Team arc;
     Team mod;
-    Team srmod;
+    Team admin;
     Team dev;
     Team exec;
 
@@ -30,13 +30,13 @@ public class PlayerOrganizer {
         voter = sb.registerNewTeam("F-Voter");
         arc = sb.registerNewTeam("E-Arch");
         mod = sb.registerNewTeam("D-Mod");
-        srmod = sb.registerNewTeam("C-SMod");
+        admin = sb.registerNewTeam("C-Admin");
         dev = sb.registerNewTeam("B-Dev");
         exec = sb.registerNewTeam("A-Exec");
 
         exec.setPrefix(colorize("&8[&4E&8] &r"));
         dev.setPrefix(colorize("&8[&5D&8] &r"));
-        srmod.setPrefix(colorize("&8[&6S&8] &r"));
+        admin.setPrefix(colorize("&8[&6A&8] &r"));
         mod.setPrefix(colorize("&8[&2M&8] &r"));
         arc.setPrefix(colorize("&8[&1A&8] &r"));
         voter.setPrefix(colorize("&8[&3V&8] &r"));

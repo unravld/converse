@@ -46,13 +46,13 @@ public class Staff extends CommandBase {
                     plugin.lp.set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.mod"));
                     Util.action(sender, "Adding " + player.getName() + " to Mod");
                     return true;
-                } else if (args[2].equalsIgnoreCase("seniormod") || args[2].equalsIgnoreCase("srmod")) {
-                    if (!sender.hasPermission("converse.staff.add.seniormod")) {
+                } else if (args[2].equalsIgnoreCase("administrator") || args[2].equalsIgnoreCase("admin")) {
+                    if (!sender.hasPermission("converse.staff.add.admin")) {
                         sender.sendMessage(Messages.NO_PERMISSION);
                         return true;
                     }
-                    plugin.lp.set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.senior_mod"));
-                    Util.action(sender, "Adding " + player.getName() + " to Senior Mod");
+                    plugin.lp.set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.admin"));
+                    Util.action(sender, "Adding " + player.getName() + " to Admin");
                     return true;
                 } else if (args[2].equalsIgnoreCase("developer") || args[2].equalsIgnoreCase("dev")) {
                     if (!sender.hasPermission("converse.staff.add.developer")) {

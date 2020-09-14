@@ -32,7 +32,7 @@ public class LuckPermsBridge {
         assert api != null;
         User user = api.getUserManager().getUser(player);
         assert user != null;
-        return user.getPrimaryGroup().equalsIgnoreCase(plugin.config.getString("permissions.senior_mod"));
+        return user.getPrimaryGroup().equalsIgnoreCase(plugin.config.getString("permissions.admin"));
     }
 
     public boolean isDeveloper(UUID player) {
