@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.novelmc</groupId>
+    <groupId>net.unraveled</groupId>
     <artifactId>Converse</artifactId>
     <version>1.0.0</version>
 
@@ -130,7 +130,7 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>net.novelmc</shadedPattern>
+                            <shadedPattern>net.unraveled</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>

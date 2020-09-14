@@ -1,9 +1,9 @@
-# Converse 
-![](https://img.shields.io/github/issues/unravmc/Converse.svg?style=for-the-badge&logo=github)
-## Info
-Converse is a plugin by which the UnraveledMC server manages operator permissions, in-game functions, and staff member tools. It is served under Spigot for Minecraft Java Edition.
+<h1>Converse</h2>
 
-## Copyright
-This plugin is licensed under the Apache License v2.0.  All rights go to UnraveledMC and the original lead developer, @pramire.  Copyright violations can be reported on the UnraveledMC forum: https://unraveledmc.com
+**The server's core plugin** for permissions and staff moderation.
 
-This document was last updated on March 21st.  All existing forks and derivations of this software must preserve this license addition.
+![](https://img.shields.io/github/issues/unravld/converse?style=plastic)  ![](https://img.shields.io/github/license/unravld/converse?style=plastic)
+
+<p align="justify">This plugin is licensed under the Apache License v2.0.  Unraveled is a trademark, and should not be used to reference other servers or communities.  All rights go to this server's development team, and individual contributors respectively.</p>
+
+[Pramire](https://github.com/serrif) is not the lead developer.

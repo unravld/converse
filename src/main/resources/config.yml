@@ -1,8 +1,8 @@
 #
-# ConversePlugin Configuration File
+# Converse configuration
 #
 
-# URL where players should appeal their bans
+# Where should players appeal their bans?
 banurl: https://unraveledmc.com/appeal
 
 # What mode is the server in?
@@ -16,27 +16,16 @@ muted_commands:
   - me
   - mail
 
-# Permissions Configuration
+# Permissions configuration
 permissions:
-  # What is the OP group name?
   op: default
-
-  # What is the Mod group name?
   mod: mod
-
-  # What is the Senior Mod group name?
   admin: admin
-
-  # What is the Developer group name?
   developer: developer
-
-  # What is the Executive group name?
   executive: executive
-
-  # What is the Architect group name?
   architect: architect
 
-# Tab list settings
+# Tab list configuration
 tablist:
   # What should the header be?
   header:
@@ -50,7 +39,7 @@ tablist:
     - "&7unraveledmc.com"
     - "&7discord.gg/Wab3tFq"
 
-#Configuration Settings!
+# Game physics settings
 config:
   item_drops: false
   fluid_place: false
