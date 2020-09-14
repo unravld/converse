@@ -28,7 +28,7 @@ public class LuckPermsBridge {
         return user.getPrimaryGroup().equalsIgnoreCase(plugin.config.getString("permissions.mod"));
     }
 
-    public boolean isSeniorModerator(UUID player) {
+    public boolean isAdministrator(UUID player) {
         assert api != null;
         User user = api.getUserManager().getUser(player);
         assert user != null;
@@ -64,7 +64,7 @@ public class LuckPermsBridge {
     }
 
     public boolean isStaff(UUID player) {
-        return isModerator(player) || isSeniorModerator(player) || isDeveloper(player) || isExecutive(player);
+        return isModerator(player) || isAdministrator(player) || isDeveloper(player) || isExecutive(player);
     }
 
     public ChatColor nameColor(Player player) {
@@ -72,7 +72,7 @@ public class LuckPermsBridge {
             return ChatColor.RESET;
         } else if (isModerator(player.getUniqueId())) {
             return ChatColor.GREEN;
-        } else if (isSeniorModerator(player.getUniqueId())) {
+        } else if (isAdministrator(player.getUniqueId())) {
             return ChatColor.YELLOW;
         } else if (isDeveloper(player.getUniqueId())) {
             return ChatColor.LIGHT_PURPLE;
@@ -94,8 +94,8 @@ public class LuckPermsBridge {
 
         if (isModerator(player.getUniqueId())) {
             return ChatColor.DARK_GREEN + "M";
-        } else if (isSeniorModerator(player.getUniqueId())) {
-            return ChatColor.GOLD + "S";
+        } else if (isAdministrator(player.getUniqueId())) {
+            return ChatColor.GOLD + "A";
         } else if (isDeveloper(player.getUniqueId())) {
             return ChatColor.DARK_PURPLE + "D";
         } else if (isExecutive(player.getUniqueId())) {
@@ -116,7 +116,7 @@ public class LuckPermsBridge {
 
         if (isModerator(player.getUniqueId())) {
             return ChatColor.DARK_GREEN;
-        } else if (isSeniorModerator(player.getUniqueId())) {
+        } else if (isAdministrator(player.getUniqueId())) {
             return ChatColor.GOLD;
         } else if (isDeveloper(player.getUniqueId())) {
             return ChatColor.DARK_PURPLE;
