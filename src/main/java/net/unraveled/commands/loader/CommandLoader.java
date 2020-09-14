@@ -166,7 +166,7 @@ public class CommandLoader extends ConverseBase {
             try {
                 success = getPlugin().onCommand(sender, this, lbl, args);
             } catch (Throwable ex) {
-                throw new CommandException("Unhandled exception executing command " + lbl + " in plugin " + getPlugin().getDescription().getFullName(), ex + ".");
+                throw new CommandException("Unhandled exception executing command " + lbl + " in plugin " + getPlugin().getDescription().getFullName(), ex);
             }
 
             if (!success && getUsage().length() > 0) {

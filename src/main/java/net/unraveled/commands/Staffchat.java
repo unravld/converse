@@ -25,11 +25,11 @@ public class Staffchat extends CommandBase {
                 return true;
             }
             Player p = (Player) sender;
-            Util.putStaffChat(p.getUniqueId());
-            p.sendMessage(ChatColor.GRAY + "Toggled staffchat " + (Util.isInStaffChat(p.getUniqueId()) ? "on" : "off") + ".");
+            Util.putAdminChat(p.getUniqueId());
+            p.sendMessage(ChatColor.GRAY + "Toggled staffchat " + (Util.isInAdminChat(p.getUniqueId()) ? "on" : "off") + ".");
             return true;
         }
-        Util.staffchat(sender, message);
+        Util.adminchat(sender, message);
         return true;
     }
 }
