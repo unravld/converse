@@ -10,7 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(description = "Prompts and toggles private discussion with staffmembers.", usage = "/<command> [message]", aliases = "o, ac")
+@CommandParameters(description = "Prompts and toggles private discussion with staffmembers.", usage = "/<command> [message]", aliases = "o, sc, ac, adminchat")
 public class Staffchat extends CommandBase {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
