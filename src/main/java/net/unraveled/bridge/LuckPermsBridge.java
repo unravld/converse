@@ -124,6 +124,8 @@ public class LuckPermsBridge {
             return ChatColor.DARK_RED;
         } else if (isArchitect(player.getUniqueId())) {
             return ChatColor.DARK_BLUE;
+        } else if (isVoter(player.getUniqueId())) {
+            return ChatColor.DARK_AQUA;
         }
 
         return ChatColor.RESET;

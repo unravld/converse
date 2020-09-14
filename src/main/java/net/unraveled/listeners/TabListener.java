@@ -50,7 +50,12 @@ public class TabListener extends ConverseBase implements Listener {
                     + color + rank
                     + ChatColor.DARK_GRAY + "]"
                     + plugin.lp.nameColor(player) + " " + player.getName());
-        } else if (plugin.lp.isArchitect(player.getUniqueId()) || plugin.lp.isVoter(player.getUniqueId())) {
+        } else if (plugin.lp.isArchitect(player.getUniqueId())) {
+            player.setPlayerListName(ChatColor.DARK_GRAY + "["
+                    + color + rank
+                    + ChatColor.DARK_GRAY + "]"
+                    + plugin.lp.nameColor(player) + " " + player.getName());
+        } else if (plugin.lp.isVoter(player.getUniqueId())) {
             player.setPlayerListName(ChatColor.DARK_GRAY + "["
                     + color + rank
                     + ChatColor.DARK_GRAY + "]"
@@ -75,7 +80,12 @@ public class TabListener extends ConverseBase implements Listener {
                             + color + rank
                             + ChatColor.DARK_GRAY + "]"
                             + plugin.lp.nameColor(player) + " " + player.getName());
-                } else if (plugin.lp.isArchitect(player.getUniqueId()) || plugin.lp.isVoter(player.getUniqueId())) {
+                } else if (plugin.lp.isArchitect(player.getUniqueId())) {
+                    player.setPlayerListName(ChatColor.DARK_GRAY + "["
+                            + color + rank
+                            + ChatColor.DARK_GRAY + "]"
+                            + plugin.lp.nameColor(player) + " " + player.getName());
+                } else if (plugin.lp.isVoter(player.getUniqueId())) {
                     player.setPlayerListName(ChatColor.DARK_GRAY + "["
                             + color + rank
                             + ChatColor.DARK_GRAY + "]"
