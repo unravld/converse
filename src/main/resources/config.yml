@@ -40,12 +40,13 @@ permissions:
 tablist:
   # What should the header be?
   header:
-    - "&7Unraveled&8MC"
+    - "&c&oUnraveled"
     - "&8--+--"
 
   # What should the footer be?
   footer:
     - "&8--+--"
+    - "&6&o/vote &7&oor die."
     - "&7unraveledmc.com"
     - "&7discord.gg/Wab3tFq"
 
