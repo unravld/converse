@@ -46,13 +46,13 @@ public class ChatListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void adminChat(@NotNull AsyncPlayerChatEvent event) {
+    public void staffChat(@NotNull AsyncPlayerChatEvent event) {
         String message = event.getMessage().trim();
         Player p = event.getPlayer();
 
-        if (Util.isInAdminChat(p.getUniqueId())) {
+        if (Util.isInStaffChat(p.getUniqueId())) {
             event.setCancelled(true);
-            Util.adminchat(p, message);
+            Util.staffchat(p, message);
         }
     }
 }

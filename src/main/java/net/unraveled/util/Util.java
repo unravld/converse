@@ -98,7 +98,7 @@ public class Util extends ConverseBase {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
-    public static void adminchat(@NotNull CommandSender sender, String message) {
+    public static void staffchat(@NotNull CommandSender sender, String message) {
         Player p = Bukkit.getPlayer(sender.getName());
         String rank = plugin.lp.displayRank(Bukkit.getPlayer(sender.getName()));
         ChatColor color = plugin.lp.displayRankColor(Bukkit.getPlayer(sender.getName()));
@@ -111,43 +111,43 @@ public class Util extends ConverseBase {
         Bukkit.getLogger().info(ChatColor.stripColor(format));
         Bukkit.getOnlinePlayers()
                 .stream()
-                .filter((players) -> (players.hasPermission("converse.adminchat")))
+                .filter((players) -> (players.hasPermission("converse.staffchat")))
                 .forEachOrdered((players) -> players.sendMessage(format));
     }
 
-    public static void adminchat(Player p, String message) {
-        adminchat((CommandSender) p, message);
+    public static void staffchat(Player p, String message) {
+        staffchat((CommandSender) p, message);
     }
 
-    private static HashMap<UUID, Boolean> adminChat = new HashMap<>();
+    private static HashMap<UUID, Boolean> staffChat = new HashMap<>();
 
-    //creation of the adminchat toggleable variable;
-    public static void putAdminChat(UUID uuid) {
+    //creation of the staffchat toggleable variable;
+    public static void putStaffChat(UUID uuid) {
         Util.uuid = uuid;
-        if (adminChat.containsKey(uuid)) {
-            boolean value = adminChat.get(uuid);
+        if (staffChat.containsKey(uuid)) {
+            boolean value = staffChat.get(uuid);
             if (value) {
-                adminChat.replace(uuid, false);
+                staffChat.replace(uuid, false);
             } else {
-                adminChat.replace(uuid, true);
+                staffChat.replace(uuid, true);
             }
         } else {
-            adminChat.put(uuid, true);
+            staffChat.put(uuid, true);
         }
     }
 
-    public static void removeAdminChat(UUID uuid) {
+    public static void removeStaffChat(UUID uuid) {
         Util.uuid = uuid;
-        adminChat.remove(uuid);
+        staffChat.remove(uuid);
     }
 
-    public static Boolean isInAdminChat(UUID uuid) {
+    public static Boolean isInStaffChat(UUID uuid) {
         Util.uuid = uuid;
-        if (!adminChat.containsKey(uuid)) {
+        if (!staffChat.containsKey(uuid)) {
             return false;
         }
 
-        return adminChat.get(uuid);
+        return staffChat.get(uuid);
     }
 
     public static final List<String> orderedRoles = Arrays.asList("default", "voter", "architect", "mod", "seniormod", "developer", "executive");
