@@ -50,8 +50,8 @@ public class PlayerOrganizer {
         //
         if (LPB.isModerator(p.getUniqueId())) {
             mod.addEntry(pName);
-        } else if (LPB.isSeniorModerator(p.getUniqueId())) {
-            srmod.addEntry(pName);
+        } else if (LPB.isAdministrator(p.getUniqueId())) {
+            admin.addEntry(pName);
         } else if (LPB.isDeveloper(p.getUniqueId())) {
             dev.addEntry(pName);
         } else if (LPB.isExecutive(p.getUniqueId())) {
