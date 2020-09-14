@@ -5,6 +5,7 @@ import net.unraveled.commands.loader.CommandParameters;
 import net.unraveled.commands.loader.Messages;
 import net.unraveled.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
