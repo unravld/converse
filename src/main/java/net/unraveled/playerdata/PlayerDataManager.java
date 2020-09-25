@@ -15,12 +15,13 @@ import java.util.Map;
 import java.util.UUID;
 
 public class PlayerDataManager extends ConverseBase {
-    private Map<UUID, PlayerData> loadedData = new HashMap<>();
+    private final Map<UUID, PlayerData> loadedData = new HashMap<>();
     public final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public BukkitTask scheduler;
+    public final BukkitTask scheduler;
 
     public PlayerDataManager() {
         File playersFolder = new File(plugin.getDataFolder(), "players");
+        //noinspection ResultOfMethodCallIgnored
         playersFolder.mkdirs();
 
         scheduler = new BukkitRunnable() {

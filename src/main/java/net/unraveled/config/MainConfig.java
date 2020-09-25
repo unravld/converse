@@ -7,8 +7,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class MainConfig extends YamlConfiguration {
     private static MainConfig config;
-    private ConversePlugin plugin;
-    private File file;
+    private final ConversePlugin plugin;
+    private final File file;
 
     public MainConfig(ConversePlugin plugin) {
         this.plugin = plugin;

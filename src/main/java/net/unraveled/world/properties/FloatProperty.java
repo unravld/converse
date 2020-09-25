@@ -4,6 +4,7 @@ import net.unraveled.world.Referencer;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -69,6 +70,7 @@ public class FloatProperty implements Keyed {
         return defaultValues[defaultValues.length - 1];
     }
 
+    @NotNull
     @Override
     public NamespacedKey getKey() {
         return this.name;
@@ -126,11 +128,7 @@ public class FloatProperty implements Keyed {
         checkForNaN(value);
 
         synchronized (mutationLock) {
-            float[] worldValues = this.allWorldValues.get(world);
-            if (worldValues == null) {
-                worldValues = new float[1];
-                this.allWorldValues.put(world, worldValues);
-            }
+            float[] worldValues = this.allWorldValues.computeIfAbsent(world, k -> new float[1]);
 
             worldValues[worldValues.length - 1] = value;
         }

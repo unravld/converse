@@ -2,6 +2,7 @@ package net.unraveled.world;
 
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.world.WorldEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class WorldGenInitEvent extends WorldEvent {
     private static final HandlerList handlers = new HandlerList();
@@ -17,6 +18,7 @@ public class WorldGenInitEvent extends WorldEvent {
         this.worldGen = worldGen;
     }
 
+    @NotNull
     @Override
     public HandlerList getHandlers() {
         return handlers;

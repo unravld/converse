@@ -16,6 +16,8 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
+import java.util.Objects;
+
 @SuppressWarnings("unused")
 public class ManageListener extends ConverseBase implements Listener {
     public ManageListener(ConversePlugin plugin) {
@@ -27,7 +29,7 @@ public class ManageListener extends ConverseBase implements Listener {
         if (plugin.playerDataManager.getPlayerData(e.getPlayer()).getManagedSettings().isMovementDisallowed()) {
             Location to = e.getTo();
             Location from = e.getFrom();
-            if (to.getX() != from.getX() || to.getY() != from.getY() || to.getZ() != from.getZ()) {
+            if (Objects.requireNonNull(to).getX() != from.getX() || to.getY() != from.getY() || to.getZ() != from.getZ()) {
                 e.setTo(from);
             }
         }

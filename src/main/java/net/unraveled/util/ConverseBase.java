@@ -3,9 +3,10 @@ package net.unraveled.util;
 import me.lucko.luckperms.api.LuckPermsApi;
 import net.unraveled.ConversePlugin;
 import org.bukkit.Server;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class ConverseBase {
-    protected static ConversePlugin plugin = ConversePlugin.plugin;
+    protected static final ConversePlugin plugin = JavaPlugin.getPlugin(ConversePlugin.class);
     protected Server server = ConversePlugin.server;
-    protected LuckPermsApi api = ConversePlugin.getLuckPermsAPI();
+    protected final LuckPermsApi api = ConversePlugin.getLuckPermsAPI();
 }

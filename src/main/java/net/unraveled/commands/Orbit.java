@@ -21,7 +21,6 @@ public class Orbit extends CommandBase {
             return true;
         }
         if (args.length == 0) return false;
-        CommandSender p = sender;
         Boolean orbitStatus;
         Player targetPlayer=Bukkit.getPlayer(args[0]);
         if (targetPlayer == null) {
@@ -30,7 +29,7 @@ public class Orbit extends CommandBase {
         }
         UUID targetPlayerUUID=targetPlayer.getUniqueId();
         if(args.length==2){
-            Boolean newSetting;
+            boolean newSetting;
             switch(args[1].toLowerCase()){
                 case "on":
                     newSetting=true;
@@ -43,7 +42,7 @@ public class Orbit extends CommandBase {
             }
             orbitStatus=Util.setOrbit(targetPlayerUUID,newSetting);
         }else orbitStatus=Util.toggleOrbit(targetPlayerUUID);
-        p.sendMessage(ChatColor.GRAY + "Set orbit to " + (orbitStatus ? "on" : "off") + " for player " + args[0] + ".");
+        sender.sendMessage(ChatColor.GRAY + "Set orbit to " + (orbitStatus ? "on" : "off") + " for player " + args[0] + ".");
         return true;
     }
 }

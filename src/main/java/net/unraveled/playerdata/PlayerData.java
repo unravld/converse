@@ -5,10 +5,7 @@ import net.unraveled.bans.BanData;
 import net.unraveled.commands.Manage;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerData {
     private UUID UUID;
@@ -23,8 +20,9 @@ public class PlayerData {
 
     public PlayerData(Player player) {
         this.UUID = player.getUniqueId();
-        this.lastKnownRank = ConversePlugin.getLuckPermsAPI().getUserManager().getUser(player.getUniqueId()).getPrimaryGroup();
-        this.ip = player.getAddress().getAddress().getHostAddress().replace("\\.", "\\_");
+        this.lastKnownRank = Objects
+                .requireNonNull(ConversePlugin.getLuckPermsAPI().getUserManager().getUser(player.getUniqueId())).getPrimaryGroup();
+        this.ip = Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress().replace("\\.", "\\_");
         this.coins = 0;
         this.playtime = 0;
         this.lastLoggedIn = new Date();

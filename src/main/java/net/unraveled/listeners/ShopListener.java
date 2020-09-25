@@ -1,7 +1,7 @@
 package net.unraveled.listeners;
 
 import net.unraveled.ConversePlugin;
-import net.unraveled.util.ShopIndex;
+import net.unraveled.api.abstracts.AbstractGUI;
 
 import java.util.UUID;
 
@@ -28,11 +28,11 @@ public class ShopListener implements Listener {
         Player player = (Player) e.getWhoClicked();
         UUID playerUUID = player.getUniqueId();
 
-        UUID invUUID = ShopIndex.openInventories.get(playerUUID);
+        UUID invUUID = AbstractGUI.openInventories.get(playerUUID);
         if (invUUID != null) {
             e.setCancelled(true);
-            ShopIndex gui = ShopIndex.getInvByUUID().get(invUUID);
-            ShopIndex.GUIAction action = gui.getActions().get(e.getSlot());
+            AbstractGUI gui = AbstractGUI.getInvByUUID().get(invUUID);
+            AbstractGUI.GUIAction action = gui.getActions().get(e.getSlot());
             if (action != null) {
                 action.click(player);
             }
@@ -44,7 +44,7 @@ public class ShopListener implements Listener {
         Player player = (Player) e.getPlayer();
         UUID playerUUID = player.getUniqueId();
 
-        ShopIndex.openInventories.remove(playerUUID);
+        AbstractGUI.openInventories.remove(playerUUID);
     }
 
 }

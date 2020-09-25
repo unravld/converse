@@ -1,7 +1,5 @@
 package net.unraveled;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import me.lucko.luckperms.api.LuckPermsApi;
 import net.unraveled.bans.BanManager;
 import net.unraveled.bridge.LuckPermsBridge;
@@ -12,9 +10,6 @@ import net.unraveled.config.MainConfig;
 import net.unraveled.listeners.*;
 import net.unraveled.playerdata.PlayerDataListener;
 import net.unraveled.playerdata.PlayerDataManager;
-import net.unraveled.shop.MainMenu;
-import net.unraveled.shop.PlayersMenu;
-import net.unraveled.shop.TrailsMenu;
 import net.unraveled.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
@@ -23,6 +18,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +26,6 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class ConversePlugin extends JavaPlugin {
-    public static ConversePlugin plugin;
     public static final BuildProperties build = new BuildProperties();
     public static Server server;
     public static Util util;
@@ -42,9 +37,6 @@ public class ConversePlugin extends JavaPlugin {
     // LuckPerms
     public LuckPermsBridge lp;
     // Shop
-    public MainMenu shop;
-    public TrailsMenu trails;
-    public PlayersMenu players;
     public ShopListener shl;
     public Punisher af;
     // Listeners
@@ -66,7 +58,7 @@ public class ConversePlugin extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        plugin = this;
+        ConversePlugin plugin = new Container().getPlugin();
         server = plugin.getServer();
         config = new MainConfig(this);
         reflect = new Reflect(Converse.class);
@@ -89,8 +81,6 @@ public class ConversePlugin extends JavaPlugin {
         registerListeners();
         // Banning
         banManager = new BanManager();
-        // Shops
-        loadShops();
         util = new Util();
         //Scoreboard for Tablist
         po = new PlayerOrganizer();
@@ -124,14 +114,8 @@ public class ConversePlugin extends JavaPlugin {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String lbl, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String lbl, @NotNull String[] args) {
         return CommandHandler.handle(sender, cmd, lbl, args);
-    }
-
-    private void loadShops() {
-        shop = new MainMenu();
-        trails = new TrailsMenu();
-        players = new PlayersMenu();
     }
 
     public static LuckPermsApi getLuckPermsAPI() {

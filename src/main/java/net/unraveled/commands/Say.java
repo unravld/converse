@@ -29,10 +29,9 @@ public class Say extends CommandBase
             sender.sendMessage(ChatColor.GRAY + "Incorrect syntax.");
             return false;
         } else {
-            StringBuilder builder = new StringBuilder();
-            builder.append(ChatColor.AQUA + "[" + "Server:" + sender.getName() + "] ");
-            builder.append(StringUtils.join(args, ' '));
-            Bukkit.broadcastMessage(builder.toString());
+            String builder = ChatColor.AQUA + "[" + "Server:" + sender.getName() + "] " +
+                    StringUtils.join(args, ' ');
+            Bukkit.broadcastMessage(builder);
 
         }
 

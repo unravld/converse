@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class BanManager extends ConverseBase {
-    File masterFile;
+    final File masterFile;
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
 
@@ -28,7 +28,8 @@ public class BanManager extends ConverseBase {
 
     public void createMasterIfNecessary() {
         try {
-            if (!masterFile.exists()) masterFile.createNewFile();
+            if (!masterFile.exists()) //noinspection ResultOfMethodCallIgnored
+                masterFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }

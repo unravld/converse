@@ -17,11 +17,9 @@ import java.util.Map;
 import java.util.UUID;
 
 public class CageListener implements Listener {
-    private final ConversePlugin plugin;
     public final Map<UUID, Cage.Cager> cages = new HashMap<>();
 
     public CageListener(ConversePlugin plugin) {
-        this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

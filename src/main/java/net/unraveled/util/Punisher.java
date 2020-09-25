@@ -14,7 +14,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
@@ -41,11 +40,11 @@ public class Punisher implements Listener {
     }
 
     public static void addToA(Player key, String value) {
-        String v = value;
-        if (v.contains(" ")) {
-            v.replace(" ", "");
+        if (value.contains(" ")) {
+            //noinspection ResultOfMethodCallIgnored,ResultOfMethodCallIgnored
+            value.replace(" ", "");
         }
-        A.put(key, v);
+        A.put(key, value);
     }
 
     public static void removeFromA(Player key) {
@@ -54,30 +53,27 @@ public class Punisher implements Listener {
 
     public static List<String> getKeys() {
         List<String> contents = new LinkedList<>();
-        if (A.isEmpty() || A == null) {
+        if (A.isEmpty()) {
             return null;
         }
-        A.keySet().forEach(p -> {
-            contents.add(p.getName());
-        });
+        A.keySet().forEach(p -> contents.add(p.getName()));
         return contents;
     }
 
     public static List<String> getValues() {
         List<String> contents = new LinkedList<>();
-        if (A.isEmpty() || A == null) {
+        if (A.isEmpty()) {
             return null;
         }
-        A.keySet().forEach(p -> {
-            contents.add(A.get(p));
-        });
+        A.keySet().forEach(p -> contents.add(A.get(p)));
         return contents;
     }
 
+    @SuppressWarnings("SuspiciousMethodCalls")
     @EventHandler
     public void playerDeathEvent(PlayerDeathEvent e) {
         if (A.containsKey(e.getEntity().getPlayer())
-                && A.get(e.getEntity().getPlayer().getName()).equalsIgnoreCase("dummy")) {
+                && A.get(Objects.requireNonNull(e.getEntity().getPlayer()).getName()).equalsIgnoreCase("dummy")) {
                 e.setDeathMessage(e.getEntity().getPlayer().getName()
                         + " tried to eat too much ass!");
         }
@@ -90,7 +86,7 @@ public class Punisher implements Listener {
         Player player = e.getPlayer();
 
         // Check for a rotation;
-        if (from.getWorld() == to.getWorld() && from.distanceSquared(to) < (0.0001 * 0.0001)) {
+        if (from.getWorld() == Objects.requireNonNull(to).getWorld() && from.distanceSquared(to) < (0.0001 * 0.0001)) {
             return;
         }
 
@@ -138,7 +134,7 @@ public class Punisher implements Listener {
                 player.setGameMode(GameMode.SURVIVAL);
             }
             if (action.equals(Action.LEFT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_BLOCK)) {
-                e.getClickedBlock().setType(Material.BEDROCK);
+                Objects.requireNonNull(e.getClickedBlock()).setType(Material.BEDROCK);
             }
         }
     }
@@ -155,7 +151,7 @@ public class Punisher implements Listener {
             e.getPlayer().setGameMode(GameMode.ADVENTURE);
             e.getPlayer().setFoodLevel(1);
             for (Entity ent : e.getPlayer().getWorld().getEntities()) {
-                if (Creature.class.isAssignableFrom(ent.getType().getEntityClass())) {
+                if (Creature.class.isAssignableFrom(Objects.requireNonNull(ent.getType().getEntityClass()))) {
                     if (e.getPlayer().getLocation().distanceSquared(ent.getLocation()) <= 50.0) {
                         ent.teleport(e.getPlayer().getLocation().clone());
                     }

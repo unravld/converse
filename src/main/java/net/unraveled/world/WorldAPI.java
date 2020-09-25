@@ -11,8 +11,7 @@ import java.util.function.Consumer;
 public interface WorldAPI {
     static WorldAPI getInstance(Plugin plugin) {
         JavaPlugin plug = JavaPlugin.getProvidingPlugin(WorldAPI.class);
-        WorldAPI api = (WorldAPI) plug;
-        return api;
+        return (WorldAPI) plug;
     }
 
     ChunkGenerator createCumstonGenerator(Referencer world, Consumer<WorldGenBase> consumer);

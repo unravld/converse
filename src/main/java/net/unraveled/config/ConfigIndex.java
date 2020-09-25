@@ -1,5 +1,6 @@
 package net.unraveled.config;
 
+import net.unraveled.Container;
 import net.unraveled.ConversePlugin;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -9,10 +10,11 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ConfigIndex {
     public static void createDefaultConfiguration(final String fileName) {
-        final File targetFile = new File(ConversePlugin.plugin.getDataFolder(), fileName);
+        final File targetFile = new File(new Container().getPlugin().getDataFolder(), fileName);
 
         if (targetFile.exists()) {
             return;
@@ -21,8 +23,8 @@ public class ConfigIndex {
         Bukkit.getLogger().info("Installing default configuration file template: " + targetFile.getPath());
 
         try {
-            final InputStream inputStream = ConversePlugin.plugin.getResource(fileName);
-            FileUtils.copyInputStreamToFile(inputStream, targetFile);
+            final InputStream inputStream = new Container().getPlugin().getResource(fileName);
+            FileUtils.copyInputStreamToFile(Objects.requireNonNull(inputStream), targetFile);
             inputStream.close();
         } catch (IOException ex) {
             Bukkit.getLogger().severe(ex.getMessage());
@@ -39,14 +41,16 @@ public class ConfigIndex {
     public static void deleteCoreDumps() {
         final File[] coreDumps = new File(".").listFiles(f -> f.getName().startsWith("java.core"));
 
-        Arrays.stream(coreDumps).forEach(dump -> {
+        Arrays.stream(Objects.requireNonNull(coreDumps)).forEach(dump -> {
             Bukkit.getLogger().info("Removing core dump file: " + dump.getName());
+            //noinspection ResultOfMethodCallIgnored
             dump.delete();
         });
     }
 
     public static void copy(InputStream inputStream, File file) throws IOException {
         if (!file.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             file.getParentFile().mkdirs();
         }
 
@@ -64,9 +68,10 @@ public class ConfigIndex {
         return new File(plugin.getDataFolder(), name);
     }
 
+    @SuppressWarnings("unchecked")
     public static Map<String, Boolean> getSavedFlags() {
         Map<String, Boolean> flags = null;
-        File input = new File(ConversePlugin.plugin.getDataFolder(), "flags.yml");
+        File input = new File(new Container().getPlugin().getDataFolder(), "flags.yml");
         if (input.exists()) {
             try {
                 FileInputStream inputStream = new FileInputStream(input);
@@ -74,11 +79,7 @@ public class ConfigIndex {
                 flags = (HashMap<String, Boolean>) objectStream.readObject();
                 objectStream.close();
                 inputStream.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
@@ -96,7 +97,7 @@ public class ConfigIndex {
         }
 
         if (value != null) {
-            return value.booleanValue();
+            return value;
         } else {
             throw new Exception();
         }
@@ -110,13 +111,11 @@ public class ConfigIndex {
         flags.put(flag, value);
 
         try {
-            final FileOutputStream outputStream = new FileOutputStream((new File(ConversePlugin.plugin.getDataFolder(), "flags.yml")));
+            final FileOutputStream outputStream = new FileOutputStream((new File(new Container().getPlugin().getDataFolder(), "flags.yml")));
             final ObjectOutputStream objectStream = new ObjectOutputStream(outputStream);
             objectStream.writeObject(flags);
             objectStream.close();
             outputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,20 +1,21 @@
 package net.unraveled.commands.loader;
 
+import net.unraveled.Container;
 import net.unraveled.ConversePlugin;
+import net.unraveled.commands.Converse;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
 public abstract class CommandBase {
     protected ConversePlugin plugin;
     protected Server server;
-    private CommandSender commandSender;
-    private Class<?> commandClass;
 
     public CommandBase() {}
 
@@ -23,8 +24,10 @@ public abstract class CommandBase {
     public void setup(final ConversePlugin plugin, final CommandSender cs, final Class<?> clazz) {
         this.plugin = plugin;
         this.server = plugin.getServer();
-        this.commandSender = cs;
-        this.commandClass = clazz;
+    }
+
+    public ConversePlugin getPlugin() {
+        return JavaPlugin.getPlugin(ConversePlugin.class);
     }
 
     public Player getPlayer(final String partial) {

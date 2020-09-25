@@ -25,7 +25,7 @@ public class CommandLoader extends ConverseBase {
         commandList.clear();
         commandList.addAll(getCommands());
 
-        commandList.stream().forEach(command -> {
+        commandList.forEach(command -> {
            Dynamic dynamic = new Dynamic(command);
            Command existing = map.getCommand(dynamic.getName());
            if (existing != null) {
@@ -136,13 +136,12 @@ public class CommandLoader extends ConverseBase {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            sb.append("commandName: ").append(commandName);
-            sb.append("\ncommandClass: ").append(commandClass.getName());
-            sb.append("\ndescription: ").append(description);
-            sb.append("\nusage: ").append(usage);
-            sb.append("\naliases: ").append(aliases);
-            return sb.toString();
+            String sb = "commandName: " + commandName +
+                    "\ncommandClass: " + commandClass.getName() +
+                    "\ndescription: " + description +
+                    "\nusage: " + usage +
+                    "\naliases: " + aliases;
+            return sb;
         }
     }
 

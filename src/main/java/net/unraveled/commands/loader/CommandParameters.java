@@ -4,10 +4,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-/**
- * This interface is to be used to annotate commands listed in net.unraveled.commands package.
- * The annotation can be used as follows:
- * @CommandParameters(description = "decsription", usage = "/<command> ", aliases = "alias1, alias2")
+/*
+  This interface is to be used to annotate commands listed in net.unraveled.commands package.
+  The annotation can be used as follows:
+  @CommandParameters(description = "decsription", usage = "/<command> ", aliases = "alias1, alias2")
  */
 public @interface CommandParameters {
     /**

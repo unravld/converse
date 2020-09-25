@@ -1,4 +1,4 @@
-package net.unraveled.util;
+package net.unraveled.api.abstracts;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,17 +13,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public abstract class ShopIndex implements InventoryHolder, Listener {
+public abstract class AbstractGUI implements InventoryHolder, Listener {
     private final Inventory INV;
-    private Map<Integer, GUIAction> actions;
-    private UUID uuid;
+    private final Map<Integer, GUIAction> actions;
+    private final UUID uuid;
     //
-    public static Map<UUID, ShopIndex> invByUUID = new HashMap<>();
-    public static Map<UUID, UUID> openInventories = new HashMap<>();
+    public static final Map<UUID, AbstractGUI> invByUUID = new HashMap<>();
+    public static final Map<UUID, UUID> openInventories = new HashMap<>();
 
 
     @SuppressWarnings("")
-    public ShopIndex(int invSize, String invName) {
+    public AbstractGUI(int invSize, String invName) {
         uuid = UUID.randomUUID();
         INV = Bukkit.createInventory(null, invSize, invName);
         actions = new HashMap<>();
@@ -71,7 +71,7 @@ public abstract class ShopIndex implements InventoryHolder, Listener {
         invByUUID.remove(getUUId());
     }
 
-    public static Map<UUID, ShopIndex> getInvByUUID() {
+    public static Map<UUID, AbstractGUI> getInvByUUID() {
         return invByUUID;
     }
 

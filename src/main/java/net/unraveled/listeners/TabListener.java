@@ -17,11 +17,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 public class TabListener extends ConverseBase implements Listener {
-    private ConversePlugin plugin;
-    private Tabbed tabbed;
+    private final ConversePlugin plugin;
+    private final Tabbed tabbed;
 
     public TabListener(ConversePlugin plugin) {
         this.plugin = plugin;

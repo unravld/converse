@@ -119,7 +119,7 @@ public class Util extends ConverseBase {
         staffchat((CommandSender) p, message);
     }
 
-    private static HashMap<UUID, Boolean> staffChat = new HashMap<>();
+    private static final HashMap<UUID, Boolean> staffChat = new HashMap<>();
 
     //creation of the staffchat toggleable variable;
     public static void putStaffChat(UUID uuid) {
@@ -177,7 +177,7 @@ public class Util extends ConverseBase {
     }
 
     //orbit
-    private static ArrayList<UUID> orbit = new ArrayList<>();
+    private static final ArrayList<UUID> orbit = new ArrayList<>();
 
     public static Boolean toggleOrbit(UUID uuid){
         if(isInOrbit(uuid)){
@@ -311,7 +311,7 @@ public class Util extends ConverseBase {
         return packageName.substring(packageName.lastIndexOf(".") + 1);
     }
 
-    public static Map<Player, Particle> map = new HashMap<>();
+    public static final Map<Player, Particle> map = new HashMap<>();
 
     public static String getTime() {
         return time;

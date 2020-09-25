@@ -1,7 +1,8 @@
 package net.unraveled.listeners;
 
+import net.unraveled.Container;
 import net.unraveled.ConversePlugin;
-import net.unraveled.util.ShopIndex;
+import net.unraveled.api.abstracts.AbstractGUI;
 import net.unraveled.util.Util;
 import org.bukkit.*;
 import org.bukkit.entity.Item;
@@ -21,10 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class WorldListener implements Listener {
-    private ConversePlugin plugin;
+public class WorldListener extends Container implements Listener {
+    private final ConversePlugin plugin;
 
     public WorldListener(ConversePlugin plugin) {
+        super();
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
@@ -33,23 +35,19 @@ public class WorldListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         //Custom Join Manage
         Player player = event.getPlayer();
-        ChatColor rankColor = ConversePlugin.plugin.lp.displayRankColor(player);
-        ChatColor nameColor = ConversePlugin.plugin.lp.nameColor(player);
-        String rank = ConversePlugin.plugin.lp.displayRank(player);
+        ChatColor rankColor = getPlugin().lp.displayRankColor(player);
+        ChatColor nameColor = getPlugin().lp.nameColor(player);
+        String rank = getPlugin().lp.displayRank(player);
         StringBuilder sb = new StringBuilder();
-        if (ConversePlugin.plugin.lp.isStaff(player.getUniqueId())
-                || ConversePlugin.plugin.lp.isArchitect(player.getUniqueId())
-                || ConversePlugin.plugin.lp.isVoter(player.getUniqueId())) {
-                sb.append(ChatColor.DARK_GRAY + "[")
-                        .append(ChatColor.GREEN + "+")
-                        .append(ChatColor.DARK_GRAY + "] ")
-                        .append("[" + rankColor + rank + ChatColor.DARK_GRAY + "] ")
-                        .append(nameColor + player.getName());
+        if (getPlugin().lp.isStaff(player.getUniqueId())
+                || getPlugin().lp.isArchitect(player.getUniqueId())
+                || getPlugin().lp.isVoter(player.getUniqueId())) {
+                sb.append(ChatColor.DARK_GRAY + "[").append(ChatColor.GREEN + "+").append(ChatColor.DARK_GRAY + "] ")
+                        .append("[").append(rankColor).append(rank).append(ChatColor.DARK_GRAY).append("] ")
+                        .append(nameColor).append(player.getName());
         } else {
-            sb.append(ChatColor.DARK_GRAY + "[")
-                    .append(ChatColor.GREEN + "+")
-                    .append(ChatColor.DARK_GRAY + "] ")
-                    .append(nameColor + player.getName());
+            sb.append(ChatColor.DARK_GRAY + "[").append(ChatColor.GREEN + "+").append(ChatColor.DARK_GRAY + "] ")
+                    .append(nameColor).append(player.getName());
         }
         event.setJoinMessage(sb.toString());
     }
@@ -62,20 +60,17 @@ public class WorldListener implements Listener {
             plugin.lp.disallowStaffWorld(event.getPlayer().getUniqueId());
         }
         UUID playerUUID = event.getPlayer().getUniqueId();
-        ShopIndex.openInventories.remove(playerUUID);
+        AbstractGUI.openInventories.remove(playerUUID);
 
         //custom leave
         Player player = event.getPlayer();
-        ChatColor nameColor = ConversePlugin.plugin.lp.nameColor(player);
-        StringBuilder sb = new StringBuilder();
-        sb.append(ChatColor.DARK_GRAY + "[")
-                .append(ChatColor.RED + "-")
-                .append(ChatColor.DARK_GRAY + "] ")
-                .append(nameColor + player.getName());
-        event.setQuitMessage(sb.toString());
+        ChatColor nameColor = getPlugin().lp.nameColor(player);
+        String sb = ChatColor.DARK_GRAY + "[" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " +
+                nameColor + player.getName();
+        event.setQuitMessage(sb);
     }
 
-    public boolean isDropsAllowed = ConversePlugin.plugin.config.getBoolean("item_drops");
+    public final boolean isDropsAllowed = getPlugin().config.getBoolean("item_drops");
 
     @EventHandler
     public void PlayerDrops(PlayerDropItemEvent e) {
@@ -124,13 +119,13 @@ public class WorldListener implements Listener {
     @EventHandler
     public void BlockPlacement(BlockPlaceEvent event) {
         Material m = event.getBlockPlaced().getType();
-        if (ConversePlugin.plugin.config.getBoolean("fluid_place") == false) {
+        if (!getPlugin().config.getBoolean("fluid_place")) {
             if (mats().contains(m)) {
                 event.setCancelled(true);
             }
         }
 
-        if (ConversePlugin.plugin.config.getBoolean("fire_place") == false) {
+        if (!getPlugin().config.getBoolean("fire_place")) {
             if (m == Material.FIRE) {
                 event.setCancelled(true);
             } else if (m == Material.FIRE_CHARGE) {

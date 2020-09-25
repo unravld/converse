@@ -1,5 +1,6 @@
 package net.unraveled.util;
 
+import net.unraveled.Container;
 import net.unraveled.ConversePlugin;
 import net.unraveled.bridge.LuckPermsBridge;
 import org.bukkit.Bukkit;
@@ -11,19 +12,20 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class PlayerOrganizer {
+public class PlayerOrganizer extends Container {
     //TabList Sorting Methods
-    private final LuckPermsBridge LPB = ConversePlugin.plugin.lp;
-    private Scoreboard sb;
-    Team op;
-    Team voter;
-    Team arc;
-    Team mod;
-    Team admin;
-    Team dev;
-    Team exec;
+    private final LuckPermsBridge LPB = getPlugin().lp;
+    private final Scoreboard sb;
+    final Team op;
+    final Team voter;
+    final Team arc;
+    final Team mod;
+    final Team admin;
+    final Team dev;
+    final Team exec;
 
     public PlayerOrganizer() {
+        super();
         sb = Objects.requireNonNull(Bukkit.getScoreboardManager()).getMainScoreboard();
         sb.getTeams().forEach(Team::unregister);
         op = sb.registerNewTeam("G-OP");

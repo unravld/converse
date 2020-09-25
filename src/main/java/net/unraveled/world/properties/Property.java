@@ -3,8 +3,8 @@ package net.unraveled.world.properties;
 import net.unraveled.world.Referencer;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
-import org.bukkit.World;
 import org.bukkit.block.Biome;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Property<T> implements Keyed {
+    @SuppressWarnings("unchecked")
     private static <T> List<T> singletonArrayList(@Nullable T value) {
         T[] singleArray = (T[]) new Object[1];
         singleArray[0] = value;
@@ -75,6 +76,7 @@ public class Property<T> implements Keyed {
         return defaultValues.get(defaultValues.size() - 1);
     }
 
+    @NotNull
     @Override
     public NamespacedKey getKey() {
         return this.name;
@@ -88,6 +90,7 @@ public class Property<T> implements Keyed {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public void setBiomeDefault(Biome biome, T value) {
         Objects.requireNonNull(biome, "biome");
         Objects.requireNonNull(value, "value");
@@ -104,6 +107,7 @@ public class Property<T> implements Keyed {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void setBiomeInWorldDefault(Referencer world, Biome biome, T value) {
         Objects.requireNonNull(world, "world");
         Objects.requireNonNull(biome, "biome");

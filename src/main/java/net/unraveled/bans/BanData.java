@@ -1,17 +1,9 @@
 package net.unraveled.bans;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 import java.util.UUID;
 
-import net.unraveled.ConversePlugin;
-import net.unraveled.util.Util;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class BanData {
     private UUID playerUUID;
@@ -20,7 +12,7 @@ public class BanData {
     private String reason;
     private Date banExpiration;
     private Date dateIssued;
-    private String banID;
+    private final String banID;
 
     public BanData() {
         this.banID = generateBanID();

@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class PlaytimeListener implements Listener {
     public BukkitTask scheduler;
-    public Map<UUID, Long> timeLoggedIn = new HashMap<>();
+    public final Map<UUID, Long> timeLoggedIn = new HashMap<>();
     private final ConversePlugin plugin;
 
     public PlaytimeListener(ConversePlugin plugin) {

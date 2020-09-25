@@ -20,9 +20,9 @@ import java.util.UUID;
 
 @CommandParameters(description = "Encages a player.", usage = "/<command> <<player> [block] | purge>")
 public class Cage extends CommandBase {
-    public class Cager {
-        private UUID uuid;
-        private Material cageMaterial;
+    public static class Cager {
+        private final UUID uuid;
+        private final Material cageMaterial;
         public final Map<Location, Material> previousBlocks = new HashMap<>();
 
         public Cager(Player player, Material cageMaterial) {
@@ -70,7 +70,6 @@ public class Cage extends CommandBase {
                                 Material cageMaterial = Material.GLASS;
                                 if (args.length > 1) {
                                     Material matchedMaterial = Material.matchMaterial(args[1]);
-                                    ;
                                     if (matchedMaterial != null) cageMaterial = matchedMaterial;
                                 }
 

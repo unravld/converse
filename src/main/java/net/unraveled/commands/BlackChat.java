@@ -32,11 +32,10 @@ public class BlackChat extends CommandBase {
         if (!ChatListener.isPunished(player)) {
             ChatListener.setPunished(player, true);
             sender.sendMessage(ChatColor.GRAY + "Turning on black chat for " + player.getName() + ".");
-            return true;
         } else {
             ChatListener.setPunished(player, false);
             sender.sendMessage(ChatColor.GRAY + "Turning off black chat for " + player.getName() + ".");
-            return true;
         }
+        return true;
     }
 }

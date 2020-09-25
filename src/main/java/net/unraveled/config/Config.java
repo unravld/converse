@@ -35,6 +35,7 @@ public class Config extends YamlConfiguration {
         try {
             if (copyDefaults) {
                 if (!configFile.exists()) {
+                    //noinspection ResultOfMethodCallIgnored
                     configFile.getParentFile().mkdirs();
                     try {
                         ConfigIndex.copy(plugin.getResource(configFile.getName()), configFile);
@@ -48,11 +49,7 @@ public class Config extends YamlConfiguration {
             if (configFile.exists()) {
                 super.load(configFile);
             }
-        } catch (InvalidConfigurationException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (InvalidConfigurationException | IOException e) {
             e.printStackTrace();
         }
     }

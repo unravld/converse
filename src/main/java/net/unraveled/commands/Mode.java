@@ -9,6 +9,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import java.util.Objects;
+
 @CommandParameters(description = "Changes the server mode.", usage = "/<command> [event | dev | staff | off]")
 public class Mode extends CommandBase {
     @Override
@@ -17,7 +19,7 @@ public class Mode extends CommandBase {
             return false;
         }
 
-        String mode = ConversePlugin.plugin.config.getString("mode");
+        String mode = getPlugin().config.getString("mode");
 
         if (args.length == 1) {
             switch (args[0]) {
@@ -26,7 +28,7 @@ public class Mode extends CommandBase {
                         sender.sendMessage(Messages.NO_PERMISSION);
                         return true;
                     }
-                    if (mode.equalsIgnoreCase("dev")) {
+                    if (Objects.requireNonNull(mode).equalsIgnoreCase("dev")) {
                         plugin.ml.disableDevMode();
                     } else {
                         plugin.ml.enableDevMode();
@@ -38,20 +40,19 @@ public class Mode extends CommandBase {
                         sender.sendMessage(Messages.NO_PERMISSION);
                         return true;
                     }
-                    if (mode.equalsIgnoreCase("event")) {
+                    if (Objects.requireNonNull(mode).equalsIgnoreCase("event")) {
                         plugin.ml.disableEventMode();
-                        return true;
                     } else {
                         plugin.ml.enableEventMode();
-                        return true;
                     }
+                    return true;
                 }
                 case "staff": {
                     if (!sender.hasPermission("converse.mode.staff")) {
                         sender.sendMessage(Messages.NO_PERMISSION);
                         return true;
                     }
-                    if (mode.equalsIgnoreCase("staff")) {
+                    if (Objects.requireNonNull(mode).equalsIgnoreCase("staff")) {
                         plugin.ml.disableStaffMode();
                     } else {
                         plugin.ml.enableStaffMode();
@@ -59,11 +60,11 @@ public class Mode extends CommandBase {
                     return true;
                 }
                 case "off": {
-                    if (mode.equalsIgnoreCase("default")) {
+                    if (Objects.requireNonNull(mode).equalsIgnoreCase("default")) {
                         sender.sendMessage(ChatColor.GRAY + "You are already in the default mode.");
                         return true;
                     }
-                    ConversePlugin.plugin.config.set("mode", "default");
+                    getPlugin().config.set("mode", "default");
                     Util.action(sender, "The server has re-opened to everyone.");
                     return true;
                 }
