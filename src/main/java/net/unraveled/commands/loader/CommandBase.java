@@ -1,8 +1,6 @@
 package net.unraveled.commands.loader;
 
-import net.unraveled.Container;
 import net.unraveled.ConversePlugin;
-import net.unraveled.commands.Converse;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;

@@ -1,7 +1,5 @@
 package net.unraveled.commands;
 
-import net.unraveled.bans.BanData;
-import net.unraveled.bans.BanType;
 import net.unraveled.commands.loader.CommandBase;
 import net.unraveled.commands.loader.CommandParameters;
 import net.unraveled.commands.loader.Messages;

@@ -1,6 +1,5 @@
 package net.unraveled.commands.loader;
 
-import net.unraveled.Container;
 import net.unraveled.ConversePlugin;
 
 import net.unraveled.util.ConverseBase;

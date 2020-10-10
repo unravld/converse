@@ -1,7 +1,5 @@
 package net.unraveled.commands;
 
-import net.unraveled.bans.BanData;
-import net.unraveled.bans.BanType;
 import net.unraveled.commands.loader.CommandBase;
 import net.unraveled.commands.loader.CommandParameters;
 import net.unraveled.commands.loader.Messages;
@@ -15,7 +13,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @CommandParameters(description = "Permanently bans a player.", usage = "/<command> <player> [reason] [-r]")

@@ -1,7 +1,6 @@
 package net.unraveled.playerdata;
 
 import net.unraveled.ConversePlugin;
-import net.unraveled.bans.BanData;
 import net.unraveled.commands.Manage;
 import org.bukkit.entity.Player;
 

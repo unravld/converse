@@ -1,6 +1,5 @@
 package net.unraveled.listeners;
 
-import net.unraveled.Container;
 import net.unraveled.ConversePlugin;
 import net.unraveled.api.abstracts.AbstractGUI;
 import net.unraveled.util.Util;

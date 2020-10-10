@@ -5,17 +5,20 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.Date;
+import java.util.UUID;
 
 public interface IBan {
-    ConversePlugin getPlugin();
+    UUID getUuid();
 
-    Player getPlayer();
+    String getName();
 
-    OfflinePlayer getOfflinePlayer();
+    String getPunisher();
 
     Date getBanDate();
 
     Long getBanDuration();
 
     String getBanId();
+
+    String getBanMessage();
 }

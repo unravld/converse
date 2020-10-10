@@ -1,7 +1,5 @@
 package net.unraveled.util;
 
-import net.unraveled.Container;
-import net.unraveled.ConversePlugin;
 import net.unraveled.bridge.LuckPermsBridge;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

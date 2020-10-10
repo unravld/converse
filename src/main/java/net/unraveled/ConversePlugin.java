@@ -1,7 +1,6 @@
 package net.unraveled;
 
 import me.lucko.luckperms.api.LuckPermsApi;
-import net.unraveled.bans.BanManager;
 import net.unraveled.bridge.LuckPermsBridge;
 import net.unraveled.commands.*;
 import net.unraveled.commands.loader.CommandHandler;

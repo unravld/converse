@@ -1,7 +1,5 @@
 package net.unraveled.config;
 
-import net.unraveled.Container;
-import net.unraveled.ConversePlugin;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;

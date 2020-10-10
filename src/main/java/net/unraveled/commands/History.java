@@ -2,11 +2,8 @@ package net.unraveled.commands;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
-import net.unraveled.bans.BanData;
-import net.unraveled.bans.BanType;
 import net.unraveled.commands.loader.CommandBase;
 import net.unraveled.commands.loader.CommandParameters;
 import net.unraveled.commands.loader.Messages;
