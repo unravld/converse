@@ -14,7 +14,6 @@ public class PlayerData {
     private long playtime;
     private int coins;
     private Date lastLoggedIn;
-    private List<BanData> bans;
     private Manage.ManagedSettings managedSettings;
 
     public PlayerData(Player player) {
@@ -27,15 +26,6 @@ public class PlayerData {
         this.lastLoggedIn = new Date();
         this.lastKnownName = player.getName();
         this.managedSettings = new Manage.ManagedSettings();
-        this.bans = new ArrayList<>();
-    }
-
-    public List<BanData> getBans() {
-        return bans;
-    }
-
-    public void setBans(List<BanData> bans) {
-        this.bans = bans;
     }
 
     public void setLastKnownRank(String lastKnownRank) {
@@ -100,16 +90,5 @@ public class PlayerData {
 
     public java.util.UUID getUUID() {
         return UUID;
-    }
-
-    public void addCoins(int coins) {
-        this.coins += coins;
-    }
-
-    public void removeCoins(int coins) {
-        this.coins -= coins;
-        if (this.coins < 0) {
-            this.coins = 0;
-        }
     }
 }

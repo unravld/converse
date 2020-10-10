@@ -27,8 +27,4 @@ public abstract class AbstractBan extends ConverseBase implements IBan {
         this.id = id;
         this.message = message;
     }
-
-    public abstract void save();
-
-    public abstract void load();
 }

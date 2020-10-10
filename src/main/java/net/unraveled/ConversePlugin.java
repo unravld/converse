@@ -31,8 +31,6 @@ public class ConversePlugin extends JavaPlugin {
     // Configs
     public MainConfig config;
     public PlayerOrganizer po;
-    // Banning
-    public BanManager banManager;
     // LuckPerms
     public LuckPermsBridge lp;
     // Shop
@@ -57,8 +55,7 @@ public class ConversePlugin extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        ConversePlugin plugin = new Container().getPlugin();
-        server = plugin.getServer();
+        server = this.getServer();
         config = new MainConfig(this);
         reflect = new Reflect(Converse.class);
     }
@@ -78,8 +75,6 @@ public class ConversePlugin extends JavaPlugin {
         playerDataManager = new PlayerDataManager();
         // Listener
         registerListeners();
-        // Banning
-        banManager = new BanManager();
         util = new Util();
         //Scoreboard for Tablist
         po = new PlayerOrganizer();

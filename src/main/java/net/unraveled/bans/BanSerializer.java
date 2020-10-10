@@ -56,7 +56,7 @@ public class BanSerializer extends SerializableObject<AbstractBan> {
         String fMsg = message.split(":")[1];
 
         this.serialized = ban;
-        this.ban = new BanHandler(fName, fPun, fDate, fDuration, fId, fMsg);
+        this.ban = new SimpleBan(fName, fPun, fDate, fDuration, fId, fMsg);
     }
 
     @Override

@@ -13,8 +13,12 @@ public class Config extends YamlConfiguration {
     private final File configFile;
     private final boolean copyDefaults;
 
-    public Config(Plugin plugin, String fileName, boolean versatile) {
-        this(plugin, ConfigIndex.getPluginFile(plugin, fileName), versatile);
+    public Config(Plugin plugin, String fileName) {
+        this(plugin, fileName, true);
+    }
+
+    public Config(Plugin plugin, String fileName, boolean copyDefaults) {
+        this(plugin, ConfigIndex.getPluginFile(plugin, fileName), copyDefaults);
     }
 
     public Config(Plugin plugin, File file, boolean copyDefaults) {

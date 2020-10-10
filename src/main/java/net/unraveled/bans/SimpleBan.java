@@ -1,25 +1,27 @@
 package net.unraveled.bans;
 
 import net.unraveled.api.abstracts.AbstractBan;
+import net.unraveled.config.FileUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-public class BanHandler extends AbstractBan {
+public class SimpleBan extends AbstractBan {
     private final ArrayList<AbstractBan> bans = new ArrayList<>();
 
-    public BanHandler(Player player, CommandSender sender, Date date, long duration, String id, String message) {
+    public SimpleBan(Player player, CommandSender sender, Date date, long duration, String id, String message) {
         super(player, sender.getName(), date, duration, id, message);
     }
 
-    public BanHandler(Player player, String sender, Date date, long duration, String id, String message) {
+    public SimpleBan(Player player, String sender, Date date, long duration, String id, String message) {
         super(player, sender, date, duration, id, message);
     }
 
-    public BanHandler(Player player, CommandSender sender, Date date, long duration, String id) {
+    public SimpleBan(Player player, CommandSender sender, Date date, long duration, String id) {
         this(player, sender, date, duration, id, "You are banned from this server!");
     }
 
@@ -56,32 +58,5 @@ public class BanHandler extends AbstractBan {
     @Override
     public String getBanMessage() {
         return message;
-    }
-
-    public ArrayList<AbstractBan> getBans() {
-        return bans;
-    }
-
-    public void addBan(AbstractBan ban) {
-        if (!bans.contains(ban)) bans.add(ban);
-    }
-
-    public void removeBan(AbstractBan ban) {
-        if (bans.contains(ban)) bans.remove(ban);
-    }
-
-    @Override
-    public void save() {
-        if (player.isOnline()) {
-            player.kickPlayer(message);
-        }
-
-        addBan(this);
-        // TODO: Write YAML files per user in a Bans folder.
-    }
-
-    @Override
-    public void load() {
-        // TODO: Load from YAML files per user in a Bans folder.
     }
 }
