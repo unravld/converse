@@ -17,14 +17,16 @@ public abstract class AbstractGUI implements InventoryHolder, Listener {
     private final Inventory INV;
     private final Map<Integer, GUIAction> actions;
     private final UUID uuid;
+    private final List<Integer> validNumbers = new ArrayList<>(Arrays.asList(9,18,27,36,45,54));
     //
     public static final Map<UUID, AbstractGUI> invByUUID = new HashMap<>();
     public static final Map<UUID, UUID> openInventories = new HashMap<>();
 
-
-    @SuppressWarnings("")
     public AbstractGUI(int invSize, String invName) {
         uuid = UUID.randomUUID();
+        if (!validNumbers.contains(invSize)) {
+            throw new NumberFormatException("Number must be a multiple of nine!");
+        }
         INV = Bukkit.createInventory(null, invSize, invName);
         actions = new HashMap<>();
         invByUUID.put(getUUId(), this);
@@ -84,7 +86,7 @@ public abstract class AbstractGUI implements InventoryHolder, Listener {
     }
 
     @NotNull
-    public final ItemStack newItem(Material mat, String name, String... lore) {
+    public final ItemStack newItem(Material mat, @NotNull String name, String... lore) {
         ItemStack item = new ItemStack(mat, 1);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
@@ -96,7 +98,7 @@ public abstract class AbstractGUI implements InventoryHolder, Listener {
     }
 
     @NotNull
-    public final ItemStack newPlayerHead(Player p) {
+    public final ItemStack newPlayerHead(@NotNull Player p) {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD, 1);
         SkullMeta sku = (SkullMeta) item.getItemMeta();
         assert sku != null;

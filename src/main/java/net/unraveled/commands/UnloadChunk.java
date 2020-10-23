@@ -1,7 +1,7 @@
 package net.unraveled.commands;
 
-import net.unraveled.commands.loader.CommandBase;
-import net.unraveled.commands.loader.CommandParameters;
+import net.unraveled.api.abstracts.CommandBase;
+import net.unraveled.api.annotations.CommandParameters;
 import net.unraveled.util.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;

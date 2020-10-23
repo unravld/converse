@@ -18,9 +18,8 @@ public class BanSerializer extends SerializableObject<AbstractBan> {
         StringBuilder sb = new StringBuilder();
         sb.append("name: " + ban.getName() + "\n");
         sb.append("uuid: " + ban.getUuid() + "\n");
-        sb.append("punisher: " + ban.getPunisher() + "\n");
-        sb.append("date: " + (new SimpleDateFormat("dd/MMM/yyyy").format(ban.getBanDate())) + "\n");
-        sb.append("duration: " + ban.getBanDuration() + "\n");
+        sb.append("issuer: " + ban.getPunisher() + "\n");
+        sb.append("expiry: " + (new SimpleDateFormat("dd/MMM/yyyy").format(ban.getBanExpiry())) + "\n");
         sb.append("id: " + ban.getBanId() + "\n");
         sb.append("message: " + ban.getBanMessage());
 
@@ -31,11 +30,10 @@ public class BanSerializer extends SerializableObject<AbstractBan> {
     public BanSerializer(String ban) {
         String[] args = ban.split("\\r?\\n");
         String uuid = args[1];
-        String punisher = args[2];
+        String issuer = args[2];
         String date = args[3];
-        String duration = args[4];
-        String id = args[5];
-        String message = args[6];
+        String id = args[4];
+        String message = args[5];
 
         Player fName;
         UUID fUuid = UUID.fromString(uuid.split(":")[1]);
@@ -44,19 +42,18 @@ public class BanSerializer extends SerializableObject<AbstractBan> {
         } else {
             fName = (Player) Bukkit.getOfflinePlayer(fUuid);
         }
-        String fPun = punisher.split(":")[1];
+        String fPun = issuer.split(":")[1];
         Date fDate = new Date();
         try {
             fDate = new SimpleDateFormat("dd/MMM/yyyy").parse(date.split(":")[1]);
         } catch (Exception ex) {
             ConversePlugin.server.getLogger().severe(ex.getMessage());
         }
-        long fDuration = Long.parseLong(duration.split(":")[1]);
         String fId = id.split(":")[1];
         String fMsg = message.split(":")[1];
 
         this.serialized = ban;
-        this.ban = new SimpleBan(fName, fPun, fDate, fDuration, fId, fMsg);
+        this.ban = new SimpleBan(fName, fPun, fDate, fId, fMsg);
     }
 
     @Override

@@ -13,16 +13,20 @@ import java.util.UUID;
 public class SimpleBan extends AbstractBan {
     private final ArrayList<AbstractBan> bans = new ArrayList<>();
 
-    public SimpleBan(Player player, CommandSender sender, Date date, long duration, String id, String message) {
-        super(player, sender.getName(), date, duration, id, message);
+    public SimpleBan(Player player, CommandSender sender, Date expires, String id, String message) {
+        super(player, sender.getName(), expires, id, message);
     }
 
-    public SimpleBan(Player player, String sender, Date date, long duration, String id, String message) {
-        super(player, sender, date, duration, id, message);
+    public SimpleBan(Player player, String sender, Date expires, String id, String message) {
+        super(player, sender, expires, id, message);
     }
 
-    public SimpleBan(Player player, CommandSender sender, Date date, long duration, String id) {
-        this(player, sender, date, duration, id, "You are banned from this server!");
+    public SimpleBan(Player player, CommandSender sender, Date expires, String id) {
+        this(player, sender, expires, id, "You are banned from this server!");
+    }
+
+    public SimpleBan(Player player, String sender, Date expires, String id) {
+        this(player, sender, expires, id, "You are banned from this server!");
     }
 
     @Override
@@ -41,13 +45,8 @@ public class SimpleBan extends AbstractBan {
     }
 
     @Override
-    public Date getBanDate() {
-        return date;
-    }
-
-    @Override
-    public Long getBanDuration() {
-        return duration;
+    public Date getBanExpiry() {
+        return expiry;
     }
 
     @Override

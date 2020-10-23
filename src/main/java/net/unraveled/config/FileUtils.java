@@ -28,6 +28,10 @@ public class FileUtils extends ConverseBase {
         configFile = file;
     }
 
+    public FileUtils(File file) {
+        configFile = file;
+    }
+
     public FileUtils(String fileName, String parentFolder) {
         File dataFolder = new File(plugin.getDataFolder(), parentFolder);
 
@@ -48,24 +52,33 @@ public class FileUtils extends ConverseBase {
         configFile = file;
     }
 
-    public void write(String output) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(configFile);
-        fileOutputStream.write(output.getBytes());
-        fileOutputStream.close();
+    public void write(String output) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(configFile);
+            fileOutputStream.write(output.getBytes());
+            fileOutputStream.close();
+        } catch (IOException ex) {
+            plugin.getLogger().severe(ex.getMessage());
+        }
     }
 
-    public String read() throws IOException {
-        FileInputStream stream = new FileInputStream(configFile);
-        StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8.name()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                sb.append("\n");
+    public String read() {
+        try {
+            FileInputStream stream = new FileInputStream(configFile);
+            StringBuilder sb = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8.name()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                    sb.append("\n");
+                }
+            } finally {
+                stream.close();
+                return sb.toString();
             }
-        } finally {
-            stream.close();
-            return sb.toString();
+        } catch (IOException ex) {
+            plugin.getLogger().severe(ex.getMessage());
+            return null;
         }
     }
 

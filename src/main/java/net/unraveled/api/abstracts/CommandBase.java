@@ -1,6 +1,7 @@
-package net.unraveled.commands.loader;
+package net.unraveled.api.abstracts;
 
 import net.unraveled.ConversePlugin;
+import net.unraveled.api.interfaces.ICommand;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
@@ -11,19 +12,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
 
-public abstract class CommandBase {
+public abstract class CommandBase implements ICommand {
     protected ConversePlugin plugin;
     protected Server server;
 
     public CommandBase() {}
 
-    abstract public boolean onCommand(CommandSender sender, Command cmd, String lbl, String[] args);
-
+    @Override
     public void setup(final ConversePlugin plugin, final CommandSender cs, final Class<?> clazz) {
         this.plugin = plugin;
         this.server = plugin.getServer();
     }
 
+    @Override
     public ConversePlugin getPlugin() {
         return JavaPlugin.getPlugin(ConversePlugin.class);
     }

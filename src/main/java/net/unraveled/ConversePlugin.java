@@ -1,8 +1,10 @@
 package net.unraveled;
 
 import me.lucko.luckperms.api.LuckPermsApi;
+import net.unraveled.bans.BanSystem;
 import net.unraveled.bridge.LuckPermsBridge;
-import net.unraveled.commands.*;
+import net.unraveled.commands.Cage;
+import net.unraveled.commands.Converse;
 import net.unraveled.commands.loader.CommandHandler;
 import net.unraveled.commands.loader.CommandLoader;
 import net.unraveled.config.MainConfig;
@@ -16,13 +18,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class ConversePlugin extends JavaPlugin {
     public static final BuildProperties build = new BuildProperties();
@@ -47,6 +50,7 @@ public class ConversePlugin extends JavaPlugin {
     public PlaytimeListener ptl;
     public PlayerDataListener pdl;
     public ManageListener mgrl;
+    public BanSystem bans;
 
     // Player Data
     public PlayerDataManager playerDataManager;
@@ -62,12 +66,15 @@ public class ConversePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        // Bans
+        bans = new BanSystem();
+        bans.loadAll();
         // Config
         registerConfigs();
         af = new Punisher(this);
         // BuildProperties
         build.load(this);
-        new Recurrent(this).runTaskTimer(this, 20L * 60L, 20L * 60L);
+        server.getScheduler().runTaskTimer(this, (new Recurrent()), 20L * 60L, 20L * 60L);
         // LuckPerms
         getLuckPermsAPI();
         lp = new LuckPermsBridge(this);
@@ -79,12 +86,15 @@ public class ConversePlugin extends JavaPlugin {
         //Scoreboard for Tablist
         po = new PlayerOrganizer();
         //Commands
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                CommandLoader.getInstance().scan();
-            }
-        }.runTaskLater(this, 20L);
+        server.getScheduler().runTaskLater(this, (new Load()), 20L);
+    }
+
+    private class Load implements Consumer<BukkitTask> {
+
+        @Override
+        public void accept(BukkitTask bukkitTask) {
+            CommandLoader.getInstance().scan();
+        }
     }
 
     @Override

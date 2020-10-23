@@ -2,6 +2,7 @@ package net.unraveled.commands.loader;
 
 import net.unraveled.ConversePlugin;
 
+import net.unraveled.api.abstracts.CommandBase;
 import net.unraveled.util.ConverseBase;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
@@ -33,7 +34,7 @@ public class CommandHandler extends ConverseBase {
         try {
             final ClassLoader loader = ConversePlugin.class.getClassLoader();
             base = (CommandBase) loader.loadClass(COMMAND_PATH + "." + cmd.getName()).newInstance();
-            base.setup(new Container().getPlugin(), sender, base.getClass());
+            base.setup(plugin, sender, base.getClass());
         } catch (Exception ex) {
             Bukkit.getLogger().severe("Couldn't load command: " + cmd.getName());
             Bukkit.getLogger().severe(ex.getMessage());

@@ -3,8 +3,11 @@ package net.unraveled.util;
 import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
-public class Recurrent extends BukkitRunnable {
+import java.util.function.Consumer;
+
+public class Recurrent implements Consumer<BukkitTask> {
 
     private static Long lastRan = null;
 
@@ -12,12 +15,8 @@ public class Recurrent extends BukkitRunnable {
         return lastRan;
     }
 
-    public Recurrent(Plugin plugin) {
-        Server server = plugin.getServer();
-    }
-
     @Override
-    public void run() {
+    public void accept(BukkitTask bukkitTask) {
         lastRan = System.currentTimeMillis();
     }
 }

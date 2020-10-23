@@ -1,8 +1,11 @@
 package net.unraveled.commands;
 
-import net.unraveled.commands.loader.CommandBase;
-import net.unraveled.commands.loader.CommandParameters;
+import net.unraveled.api.abstracts.AbstractBan;
+import net.unraveled.api.abstracts.CommandBase;
+import net.unraveled.api.annotations.CommandParameters;
+import net.unraveled.bans.BanSerializer;
 import net.unraveled.commands.loader.Messages;
+import net.unraveled.config.FileUtils;
 import net.unraveled.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,13 +34,14 @@ public class Unban extends CommandBase {
             return true;
         }
 
-        if (!plugin.banManager.isPlayerBanned(offlinePlayer.getUniqueId())) {
+        if (!plugin.bans.isBanned(offlinePlayer.getUniqueId())) {
             sender.sendMessage(ChatColor.GRAY + "That player isn't banned.");
             return true;
         }
 
         Util.action(sender, "Unbanning " + offlinePlayer.getName());
-        plugin.banManager.removeBanFromHistory(plugin.banManager.getLatestBan(offlinePlayer.getUniqueId()));
+        AbstractBan ban = new BanSerializer((new FileUtils(offlinePlayer.getName() + ".ban", "bans")).read()).deserialize();
+        plugin.bans.removeBan(ban);
         return true;
     }
 }

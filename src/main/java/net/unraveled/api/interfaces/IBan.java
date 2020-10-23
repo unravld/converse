@@ -14,9 +14,9 @@ public interface IBan {
 
     String getPunisher();
 
-    Date getBanDate();
+    Date getIssueDate();
 
-    Long getBanDuration();
+    Date getBanExpiry();
 
     String getBanId();
 

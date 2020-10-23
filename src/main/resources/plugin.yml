@@ -4,4 +4,4 @@ description: Core plugin for player commands and moderator tools.
 author: Unraveled
 main: net.unraveled.ConversePlugin
 depend: [LuckPerms]
-api-version: 1.14
+api-version: 1.16
