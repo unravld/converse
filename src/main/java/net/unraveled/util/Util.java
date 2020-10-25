@@ -1,10 +1,5 @@
 package net.unraveled.util;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import net.unraveled.ConversePlugin;
 import net.unraveled.playerdata.PlayerData;
 import org.bukkit.Bukkit;
@@ -17,6 +12,10 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Util extends ConverseBase {
 
@@ -150,10 +149,13 @@ public class Util extends ConverseBase {
         return staffChat.get(uuid);
     }
 
-    public static final List<String> orderedRoles = Arrays.asList("default", "voter", "architect", "mod", "seniormod", "developer", "executive");
+    public static final List<String> orderedRoles = Arrays
+            .asList("default", "voter", "architect", "mod", "seniormod", "developer", "executive");
+
     public static boolean canInteract(UUID executor, UUID target) {
         assert ConversePlugin.getLuckPermsAPI() != null;
-        String executorRank = Objects.requireNonNull(Objects.requireNonNull(ConversePlugin.getLuckPermsAPI().getUserManager().getUser(executor)).getPrimaryGroup());
+        String executorRank = Objects.requireNonNull(Objects
+                .requireNonNull(ConversePlugin.getLuckPermsAPI().getUserManager().getUser(executor)).getPrimaryGroup());
         String targetRank = plugin.playerDataManager.getPlayerData(target).getLastKnownRank();
         int executorIndex = orderedRoles.indexOf(executorRank);
         int targetIndex = orderedRoles.indexOf(targetRank);
@@ -179,8 +181,8 @@ public class Util extends ConverseBase {
     //orbit
     private static final ArrayList<UUID> orbit = new ArrayList<>();
 
-    public static Boolean toggleOrbit(UUID uuid){
-        if(isInOrbit(uuid)){
+    public static Boolean toggleOrbit(UUID uuid) {
+        if (isInOrbit(uuid)) {
             orbit.remove(uuid);
             return false;
         }
@@ -188,13 +190,13 @@ public class Util extends ConverseBase {
         return true;
     }
 
-    public static Boolean setOrbit(UUID uuid, Boolean orbitStatus){
-        Boolean isOrbiting=isInOrbit(uuid);
-        if(orbitStatus==isOrbiting)return orbitStatus;
+    public static Boolean setOrbit(UUID uuid, Boolean orbitStatus) {
+        Boolean isOrbiting = isInOrbit(uuid);
+        if (orbitStatus == isOrbiting) return orbitStatus;
         return toggleOrbit(uuid);
     }
 
-    public static Boolean isInOrbit(UUID uuid){
+    public static Boolean isInOrbit(UUID uuid) {
         return orbit.contains(uuid);
     }
 

@@ -1,7 +1,10 @@
 package net.unraveled.util;
 
 import net.unraveled.ConversePlugin;
-import org.bukkit.*;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
@@ -28,7 +31,7 @@ public class Punisher implements Listener {
     }
 
     public static Random random() {
-         return new Random();
+        return new Random();
     }
 
     public static Map<Player, String> getA() {
@@ -74,8 +77,8 @@ public class Punisher implements Listener {
     public void playerDeathEvent(PlayerDeathEvent e) {
         if (A.containsKey(e.getEntity().getPlayer())
                 && A.get(Objects.requireNonNull(e.getEntity().getPlayer()).getName()).equalsIgnoreCase("dummy")) {
-                e.setDeathMessage(e.getEntity().getPlayer().getName()
-                        + " tried to eat too much ass!");
+            e.setDeathMessage(e.getEntity().getPlayer().getName()
+                    + " tried to eat too much ass!");
         }
     }
 
@@ -121,7 +124,7 @@ public class Punisher implements Listener {
     }
 
     @EventHandler
-    public void playerInteractEvent (PlayerInteractEvent e) {
+    public void playerInteractEvent(PlayerInteractEvent e) {
         if (A.containsKey(e.getPlayer()) && A.get(e.getPlayer()).equalsIgnoreCase("spoof")) {
             Action action = e.getAction();
             Player player = e.getPlayer();
@@ -130,7 +133,7 @@ public class Punisher implements Listener {
             World world = player.getWorld();
             Location location = player.getLocation();
             if (action.equals(Action.LEFT_CLICK_AIR) || action.equals(Action.RIGHT_CLICK_AIR)) {
-                player.setVelocity(new org.bukkit.util.Vector(0,100,0));
+                player.setVelocity(new org.bukkit.util.Vector(0, 100, 0));
                 player.setGameMode(GameMode.SURVIVAL);
             }
             if (action.equals(Action.LEFT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_BLOCK)) {

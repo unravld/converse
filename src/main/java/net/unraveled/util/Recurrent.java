@@ -1,8 +1,5 @@
 package net.unraveled.util;
 
-import org.bukkit.Server;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.function.Consumer;

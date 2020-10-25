@@ -1,7 +1,6 @@
 package net.unraveled.commands.loader;
 
 import net.unraveled.ConversePlugin;
-
 import net.unraveled.api.abstracts.CommandBase;
 import net.unraveled.util.ConverseBase;
 import org.apache.commons.lang3.StringUtils;

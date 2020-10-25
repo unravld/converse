@@ -1,9 +1,5 @@
 package net.unraveled.commands;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.UUID;
-
 import net.unraveled.api.abstracts.CommandBase;
 import net.unraveled.api.annotations.CommandParameters;
 import net.unraveled.commands.loader.Messages;
@@ -13,6 +9,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.UUID;
 
 @CommandParameters(description = "Searches for a ban by username.", usage = "/<command> <player>")
 public class History extends CommandBase {
@@ -29,7 +29,8 @@ public class History extends CommandBase {
         }
 
         OfflinePlayer target = getOfflinePlayer(args[0]);
-        if ((!target.hasPlayedBefore() && !target.isOnline()) || !plugin.playerDataManager.doesPlayerDataExist(target.getUniqueId())) {
+        if ((!target.hasPlayedBefore() && !target.isOnline()) ||
+                !plugin.playerDataManager.doesPlayerDataExist(target.getUniqueId())) {
             sender.sendMessage(Messages.PLAYER_NOT_FOUND);
             return true;
         }

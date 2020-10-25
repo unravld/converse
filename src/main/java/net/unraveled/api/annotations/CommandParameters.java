@@ -30,6 +30,7 @@ public @interface CommandParameters {
     /**
      * Gets the aliases that can also be used to trigger the commands action. These are represented
      * in a single string separated by ','. It is okay to omit this tag from the annotation.
+     *
      * @return a string which can be split into an array using StringUtils.
      */
     String aliases() default "";

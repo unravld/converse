@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
         usage = "/<command> <add <player> <rank> | remove <player>>",
         aliases = "saconfig")
 public class Staff extends CommandBase {
-    private static LuckPermsApi api = ConversePlugin.getLuckPermsAPI();
+    private static final LuckPermsApi api = ConversePlugin.getLuckPermsAPI();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
@@ -59,7 +59,8 @@ public class Staff extends CommandBase {
                         sender.sendMessage(Messages.NO_PERMISSION);
                         return true;
                     }
-                    plugin.lp.set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.developer"));
+                    plugin.lp
+                            .set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.developer"));
                     Util.action(sender, "Adding " + player.getName() + " to Developer");
                     return true;
                 } else if (args[2].equalsIgnoreCase("executive") || args[2].equalsIgnoreCase("exec")) {
@@ -67,7 +68,8 @@ public class Staff extends CommandBase {
                         sender.sendMessage(Messages.NO_PERMISSION);
                         return true;
                     }
-                    plugin.lp.set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.executive"));
+                    plugin.lp
+                            .set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.executive"));
                     Util.action(sender, "Adding " + player.getName() + " to Executive");
                     return true;
                 } else if (args[2].equalsIgnoreCase("architect") || args[2].equalsIgnoreCase("arch")) {
@@ -75,7 +77,8 @@ public class Staff extends CommandBase {
                         sender.sendMessage(Messages.NO_PERMISSION);
                         return true;
                     }
-                    plugin.lp.set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.architect"));
+                    plugin.lp
+                            .set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.architect"));
                     Util.action(sender, "Adding " + player.getName() + " to Architect");
                     return true;
                 } else {

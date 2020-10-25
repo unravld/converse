@@ -2,16 +2,15 @@ package net.unraveled.listeners;
 
 import net.unraveled.ConversePlugin;
 import net.unraveled.api.abstracts.AbstractGUI;
-
-import java.util.UUID;
-
-import org.jetbrains.annotations.NotNull;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 public class ShopListener implements Listener {
 

@@ -27,12 +27,12 @@ public class CommandLoader extends ConverseBase {
         commandList.addAll(getCommands());
 
         commandList.forEach(command -> {
-           Dynamic dynamic = new Dynamic(command);
-           Command existing = map.getCommand(dynamic.getName());
-           if (existing != null) {
-               unregisterCommand(existing, map);
-           }
-           map.register(plugin.getDescription().getName(), dynamic);
+            Dynamic dynamic = new Dynamic(command);
+            Command existing = map.getCommand(dynamic.getName());
+            if (existing != null) {
+                unregisterCommand(existing, map);
+            }
+            map.register(plugin.getDescription().getName(), dynamic);
         });
         Bukkit.getLogger().info("Loaded all commands.");
     }
@@ -50,7 +50,7 @@ public class CommandLoader extends ConverseBase {
     public void unregisterCommand(Command command, CommandMap commandMap) {
         try {
             command.unregister(commandMap);
-            HashMap<String, Command> knownCommands= getKnownCommands(commandMap);
+            HashMap<String, Command> knownCommands = getKnownCommands(commandMap);
             if (knownCommands != null) {
                 knownCommands.remove(command.getName());
                 command.getAliases().forEach(knownCommands::remove);
@@ -97,7 +97,6 @@ public class CommandLoader extends ConverseBase {
         }
         return null;
     }
-
 
 
     public static class Commander {
@@ -166,7 +165,8 @@ public class CommandLoader extends ConverseBase {
             try {
                 success = getPlugin().onCommand(sender, this, lbl, args);
             } catch (Throwable ex) {
-                throw new CommandException("Unhandled exception executing command " + lbl + " in plugin " + getPlugin().getDescription().getFullName(), ex);
+                throw new CommandException("Unhandled exception executing command " + lbl + " in plugin " +
+                        getPlugin().getDescription().getFullName(), ex);
             }
 
             if (!success && getUsage().length() > 0) {

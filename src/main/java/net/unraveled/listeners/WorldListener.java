@@ -13,7 +13,10 @@ import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -41,9 +44,9 @@ public class WorldListener extends Container implements Listener {
         if (getPlugin().lp.isStaff(player.getUniqueId())
                 || getPlugin().lp.isArchitect(player.getUniqueId())
                 || getPlugin().lp.isVoter(player.getUniqueId())) {
-                sb.append(ChatColor.DARK_GRAY + "[").append(ChatColor.GREEN + "+").append(ChatColor.DARK_GRAY + "] ")
-                        .append("[").append(rankColor).append(rank).append(ChatColor.DARK_GRAY).append("] ")
-                        .append(nameColor).append(player.getName());
+            sb.append(ChatColor.DARK_GRAY + "[").append(ChatColor.GREEN + "+").append(ChatColor.DARK_GRAY + "] ")
+                    .append("[").append(rankColor).append(rank).append(ChatColor.DARK_GRAY).append("] ")
+                    .append(nameColor).append(player.getName());
         } else {
             sb.append(ChatColor.DARK_GRAY + "[").append(ChatColor.GREEN + "+").append(ChatColor.DARK_GRAY + "] ")
                     .append(nameColor).append(player.getName());
@@ -105,7 +108,7 @@ public class WorldListener extends Container implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         if (Util.isInOrbit(player.getUniqueId())) {
-            player.setVelocity(new Vector(0,10,0));
+            player.setVelocity(new Vector(0, 10, 0));
         }
 
         if (Util.map.containsKey(player)) {

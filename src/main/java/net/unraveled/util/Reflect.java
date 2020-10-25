@@ -57,7 +57,9 @@ public class Reflect {
      *
      * @return Package name for the class defined in the constructor.
      */
-    public String getLocation() { return aPackage.getName(); }
+    public String getLocation() {
+        return aPackage.getName();
+    }
 
     /**
      * Gets any classes within the scope of the reflection package which has your provided type of @Annotation present.

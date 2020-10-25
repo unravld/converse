@@ -2,6 +2,9 @@ package net.unraveled.commands;
 
 import net.unraveled.api.abstracts.CommandBase;
 import net.unraveled.api.annotations.CommandParameters;
+import net.unraveled.bans.BanType;
+import net.unraveled.bans.BanUUID;
+import net.unraveled.bans.SimpleBan;
 import net.unraveled.commands.loader.Messages;
 import net.unraveled.util.Util;
 import org.apache.commons.lang.ArrayUtils;
@@ -34,7 +37,7 @@ public class Permban extends CommandBase {
                 return true;
             }
 
-            if (plugin.banManager.isPlayerBanned(player.getUniqueId())) {
+            if (plugin.bans.isBanned(player.getUniqueId())) {
                 sender.sendMessage(ChatColor.GRAY + "That player is already banned.");
                 return true;
             }
@@ -48,18 +51,16 @@ public class Permban extends CommandBase {
                 rollback = true;
             }
 
-            Util.action(sender, "Permanently banning " + player.getName() + (!reason.isEmpty() ? " for: " + reason : ""));
-            BanData ban = new BanData();
-            if (sender instanceof Player) ban.setStaffUUID(((Player) sender).getUniqueId());
-            ban.setPlayerUUID(player.getUniqueId());
-            ban.setBanExpiration(null);
-            ban.setBanType(BanType.PERMANENT);
-            if (!reason.isEmpty()) ban.setReason(reason);
-            ban.setDateIssued(new Date());
-            plugin.banManager.addBan(ban);
+            if (reason.isEmpty()) {
+                reason = "Not Otherwise Specified";
+            }
+            SimpleBan ban = new SimpleBan((Player) player, sender, null, BanUUID.newBanID(BanType.PERMANENT), reason);
+            plugin.bans.addBan(ban);
+            Util.action(sender,
+                    "Permanently banning " + player.getName() + (!reason.isEmpty() ? " for: " + reason : ""));
             if (player.isOnline()) {
                 Player p = Bukkit.getPlayer(player.getUniqueId());
-                if (p != null) p.kickPlayer(plugin.banManager.getBanMessage(ban));
+                if (p != null) p.kickPlayer(ban.getBanMessage());
             }
 
             if (rollback) Bukkit.dispatchCommand(sender, "co rb u:" + player.getName() + " t:24h r:global");

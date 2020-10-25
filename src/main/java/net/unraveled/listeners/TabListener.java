@@ -69,7 +69,8 @@ public class TabListener extends ConverseBase implements Listener {
     private void onGroupChange(NodeMutateEvent event) {
         Bukkit.getScheduler().runTask(plugin, () ->
         {
-            if(Bukkit.getOnlinePlayers().stream().anyMatch(p -> p.getName().equals(event.getTarget().getFriendlyName()))) {
+            if (Bukkit.getOnlinePlayers().stream()
+                    .anyMatch(p -> p.getName().equals(event.getTarget().getFriendlyName()))) {
                 Player player = Bukkit.getPlayer(event.getTarget().getFriendlyName());
                 assert player != null;
                 String rank = plugin.lp.displayRank(player);

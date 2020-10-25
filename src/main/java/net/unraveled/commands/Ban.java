@@ -61,7 +61,8 @@ public class Ban extends CommandBase {
             }
 
             Util.action(sender, "Banning " + player.getName() + (!reason.isEmpty() ? " for: " + reason : ""));
-            SimpleBan ban = new SimpleBan((Player) player, sender, expires, BanUUID.newBanID(BanType.TEMPORARY), reason);
+            SimpleBan ban = new SimpleBan((Player) player, sender, expires, BanUUID
+                    .newBanID(BanType.TEMPORARY), reason);
             plugin.bans.addBan(ban);
             if (player.isOnline()) {
                 Player p = Bukkit.getPlayer(player.getUniqueId());

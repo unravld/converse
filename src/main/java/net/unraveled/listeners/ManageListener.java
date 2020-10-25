@@ -29,7 +29,8 @@ public class ManageListener extends ConverseBase implements Listener {
         if (plugin.playerDataManager.getPlayerData(e.getPlayer()).getManagedSettings().isMovementDisallowed()) {
             Location to = e.getTo();
             Location from = e.getFrom();
-            if (Objects.requireNonNull(to).getX() != from.getX() || to.getY() != from.getY() || to.getZ() != from.getZ()) {
+            if (Objects.requireNonNull(to).getX() != from.getX() || to.getY() != from.getY() ||
+                    to.getZ() != from.getZ()) {
                 e.setTo(from);
             }
         }
@@ -71,7 +72,8 @@ public class ManageListener extends ConverseBase implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDamage(EntityDamageByEntityEvent e) {
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
-            if (plugin.playerDataManager.getPlayerData(((Player) e.getDamager())).getManagedSettings().isPVPDisallowed()) {
+            if (plugin.playerDataManager.getPlayerData(((Player) e.getDamager())).getManagedSettings()
+                    .isPVPDisallowed()) {
                 e.getDamager().sendMessage(ChatColor.RED + "Your damage permissions are disabled!");
                 e.setCancelled(true);
             }

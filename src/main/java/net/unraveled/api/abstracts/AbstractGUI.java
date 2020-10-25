@@ -17,7 +17,7 @@ public abstract class AbstractGUI implements InventoryHolder, Listener {
     private final Inventory INV;
     private final Map<Integer, GUIAction> actions;
     private final UUID uuid;
-    private final List<Integer> validNumbers = new ArrayList<>(Arrays.asList(9,18,27,36,45,54));
+    private final List<Integer> validNumbers = new ArrayList<>(Arrays.asList(9, 18, 27, 36, 45, 54));
     //
     public static final Map<UUID, AbstractGUI> invByUUID = new HashMap<>();
     public static final Map<UUID, UUID> openInventories = new HashMap<>();

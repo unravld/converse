@@ -81,21 +81,26 @@ public class Manage extends CommandBase {
                 String setting = args[1].toUpperCase();
                 ManageableSetting matchedSetting = matchSetting(setting);
                 if (matchedSetting != null) {
-                    if (args[2].equalsIgnoreCase("on") || args[2].equalsIgnoreCase("enabled") || args[2].equalsIgnoreCase("true")) {
+                    if (args[2].equalsIgnoreCase("on") || args[2].equalsIgnoreCase("enabled") ||
+                            args[2].equalsIgnoreCase("true")) {
                         boolean processed = manageSetting(sender, target, oTarget, matchedSetting, true);
                         if (!processed) sender.sendMessage(Messages.PLAYER_NOT_FOUND);
-                    } else if (args[2].equalsIgnoreCase("off") || args[2].equalsIgnoreCase("disabled") || args[2].equalsIgnoreCase("false")) {
+                    } else if (args[2].equalsIgnoreCase("off") || args[2].equalsIgnoreCase("disabled") ||
+                            args[2].equalsIgnoreCase("false")) {
                         boolean processed = manageSetting(sender, target, oTarget, matchedSetting, false);
                         if (!processed) sender.sendMessage(Messages.PLAYER_NOT_FOUND);
                     } else {
-                        sender.sendMessage(ChatColor.GRAY + "Acceptable values: " + ChatColor.GRAY + "on or off, enabled or disabled, true or false");
+                        sender.sendMessage(ChatColor.GRAY + "Acceptable values: " + ChatColor.GRAY +
+                                "on or off, enabled or disabled, true or false");
                     }
                 } else {
-                    sender.sendMessage(ChatColor.GRAY + "Available settings: " + ChatColor.GRAY + Arrays.toString(ManageableSetting.values()));
+                    sender.sendMessage(ChatColor.GRAY + "Available settings: " + ChatColor.GRAY +
+                            Arrays.toString(ManageableSetting.values()));
                 }
                 return true;
             } else if (args.length == 1 && args[0].equalsIgnoreCase("list")) {
-                sender.sendMessage(ChatColor.GRAY + "Available settings: " + ChatColor.GRAY + Arrays.toString(ManageableSetting.values()));
+                sender.sendMessage(ChatColor.GRAY + "Available settings: " + ChatColor.GRAY +
+                        Arrays.toString(ManageableSetting.values()));
                 return true;
             } else if (args.length == 1 && args[0].equalsIgnoreCase("resetall")) {
                 for (Player p : Bukkit.getOnlinePlayers()) {
@@ -152,7 +157,9 @@ public class Manage extends CommandBase {
                     break;
             }
 
-            Util.action(executor, (value ? "Disabling" : "Enabling") + " " + Bukkit.getOfflinePlayer(pData.getUUID()).getName() + "'s restriction for " + setting.toString().toUpperCase());
+            Util.action(executor,
+                    (value ? "Disabling" : "Enabling") + " " + Bukkit.getOfflinePlayer(pData.getUUID()).getName() +
+                            "'s restriction for " + setting.toString().toUpperCase());
         } else {
             return false;
         }

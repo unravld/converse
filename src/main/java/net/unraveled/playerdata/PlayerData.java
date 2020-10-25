@@ -4,7 +4,9 @@ import net.unraveled.ConversePlugin;
 import net.unraveled.commands.Manage;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Date;
+import java.util.Objects;
+import java.util.UUID;
 
 public class PlayerData {
     private UUID UUID;
@@ -12,16 +14,15 @@ public class PlayerData {
     private String lastKnownName;
     private String ip;
     private long playtime;
-    private int coins;
     private Date lastLoggedIn;
     private Manage.ManagedSettings managedSettings;
 
     public PlayerData(Player player) {
         this.UUID = player.getUniqueId();
         this.lastKnownRank = Objects
-                .requireNonNull(ConversePlugin.getLuckPermsAPI().getUserManager().getUser(player.getUniqueId())).getPrimaryGroup();
+                .requireNonNull(ConversePlugin.getLuckPermsAPI().getUserManager().getUser(player.getUniqueId()))
+                .getPrimaryGroup();
         this.ip = Objects.requireNonNull(player.getAddress()).getAddress().getHostAddress().replace("\\.", "\\_");
-        this.coins = 0;
         this.playtime = 0;
         this.lastLoggedIn = new Date();
         this.lastKnownName = player.getName();
@@ -34,10 +35,6 @@ public class PlayerData {
 
     public void setManagedSettings(Manage.ManagedSettings managedSettings) {
         this.managedSettings = managedSettings;
-    }
-
-    public void setCoins(int coins) {
-        this.coins = coins;
     }
 
     public void setIp(String ip) {
@@ -62,10 +59,6 @@ public class PlayerData {
 
     public Manage.ManagedSettings getManagedSettings() {
         return managedSettings;
-    }
-
-    public int getCoins() {
-        return coins;
     }
 
     public String getLastKnownRank() {

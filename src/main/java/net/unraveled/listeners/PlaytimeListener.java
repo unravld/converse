@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -30,7 +31,7 @@ public class PlaytimeListener implements Listener {
     private void beginScheduler() {
         scheduler = new BukkitRunnable() {
             public void run() {
-                for(Player player : Bukkit.getOnlinePlayers()) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
                     cachePlayerPlaytime(player);
                 }
             }

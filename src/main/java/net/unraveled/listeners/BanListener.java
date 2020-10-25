@@ -21,8 +21,11 @@ public class BanListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(AsyncPlayerPreLoginEvent event) {
         UUID pUUID = event.getUniqueId();
-        if (plugin.banManager.isPlayerBanned(pUUID)) {
-            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, plugin.banManager.getBanMessage(plugin.banManager.getLatestBan(pUUID)));
+        if (plugin.bans.isBanned(pUUID)) {
+            if (!plugin.bans.find(pUUID).getName().equalsIgnoreCase(Bukkit.getOfflinePlayer(pUUID).getName())) {
+                plugin.bans.mark(pUUID, Bukkit.getOfflinePlayer(pUUID).getName());
+            }
+            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, plugin.bans.find(pUUID).getBanMessage());
         }
     }
 }

@@ -66,7 +66,8 @@ public class FileUtils extends ConverseBase {
         try {
             FileInputStream stream = new FileInputStream(configFile);
             StringBuilder sb = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8.name()))) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8
+                    .name()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);

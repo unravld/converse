@@ -109,7 +109,8 @@ public class ConfigIndex {
         flags.put(flag, value);
 
         try {
-            final FileOutputStream outputStream = new FileOutputStream((new File(new Container().getPlugin().getDataFolder(), "flags.yml")));
+            final FileOutputStream outputStream = new FileOutputStream((new File(new Container().getPlugin()
+                    .getDataFolder(), "flags.yml")));
             final ObjectOutputStream objectStream = new ObjectOutputStream(outputStream);
             objectStream.writeObject(flags);
             objectStream.close();

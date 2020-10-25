@@ -52,9 +52,11 @@ public class Invis extends CommandBase {
         }
 
         if (clear) {
-            sender.sendMessage(ChatColor.GRAY + "Cleared the invisibility effect from " + clears + " players: " + StringUtils.join(invisplayers, ", "));
+            sender.sendMessage(ChatColor.GRAY + "Cleared the invisibility effect from " + clears + " players: " +
+                    StringUtils.join(invisplayers, ", "));
         } else {
-            sender.sendMessage(ChatColor.GRAY + "Invisible players (" + invisplayers.size() + "): " + StringUtils.join(invisplayers, ", "));
+            sender.sendMessage(ChatColor.GRAY + "Invisible players (" + invisplayers.size() + "): " +
+                    StringUtils.join(invisplayers, ", "));
         }
 
         return true;

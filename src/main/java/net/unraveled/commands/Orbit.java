@@ -22,27 +22,28 @@ public class Orbit extends CommandBase {
         }
         if (args.length == 0) return false;
         Boolean orbitStatus;
-        Player targetPlayer=Bukkit.getPlayer(args[0]);
+        Player targetPlayer = Bukkit.getPlayer(args[0]);
         if (targetPlayer == null) {
             sender.sendMessage(Messages.PLAYER_NOT_FOUND);
             return true;
         }
-        UUID targetPlayerUUID=targetPlayer.getUniqueId();
-        if(args.length==2){
+        UUID targetPlayerUUID = targetPlayer.getUniqueId();
+        if (args.length == 2) {
             boolean newSetting;
-            switch(args[1].toLowerCase()){
+            switch (args[1].toLowerCase()) {
                 case "on":
-                    newSetting=true;
+                    newSetting = true;
                     break;
                 case "off":
-                    newSetting=false;
+                    newSetting = false;
                     break;
                 default:
                     return false;
             }
-            orbitStatus=Util.setOrbit(targetPlayerUUID,newSetting);
-        }else orbitStatus=Util.toggleOrbit(targetPlayerUUID);
-        sender.sendMessage(ChatColor.GRAY + "Set orbit to " + (orbitStatus ? "on" : "off") + " for player " + args[0] + ".");
+            orbitStatus = Util.setOrbit(targetPlayerUUID, newSetting);
+        } else orbitStatus = Util.toggleOrbit(targetPlayerUUID);
+        sender.sendMessage(
+                ChatColor.GRAY + "Set orbit to " + (orbitStatus ? "on" : "off") + " for player " + args[0] + ".");
         return true;
     }
 }

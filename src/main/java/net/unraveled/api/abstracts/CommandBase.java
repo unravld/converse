@@ -5,7 +5,6 @@ import net.unraveled.api.interfaces.ICommand;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,7 +15,8 @@ public abstract class CommandBase implements ICommand {
     protected ConversePlugin plugin;
     protected Server server;
 
-    public CommandBase() {}
+    public CommandBase() {
+    }
 
     @Override
     public void setup(final ConversePlugin plugin, final CommandSender cs, final Class<?> clazz) {

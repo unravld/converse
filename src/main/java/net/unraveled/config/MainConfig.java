@@ -1,9 +1,9 @@
 package net.unraveled.config;
 
-import java.io.File;
-
 import net.unraveled.ConversePlugin;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
 
 public class MainConfig extends YamlConfiguration {
     private static MainConfig config;

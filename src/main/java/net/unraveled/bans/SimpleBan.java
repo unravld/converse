@@ -1,11 +1,9 @@
 package net.unraveled.bans;
 
 import net.unraveled.api.abstracts.AbstractBan;
-import net.unraveled.config.FileUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;

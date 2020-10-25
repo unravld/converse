@@ -40,7 +40,8 @@ public class Unban extends CommandBase {
         }
 
         Util.action(sender, "Unbanning " + offlinePlayer.getName());
-        AbstractBan ban = new BanSerializer((new FileUtils(offlinePlayer.getName() + ".ban", "bans")).read()).deserialize();
+        AbstractBan ban = new BanSerializer((new FileUtils(offlinePlayer.getName() + ".ban", "bans")).read())
+                .deserialize();
         plugin.bans.removeBan(ban);
         return true;
     }

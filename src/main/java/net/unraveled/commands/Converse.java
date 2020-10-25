@@ -23,10 +23,13 @@ public class Converse extends CommandBase {
                     build.version,
                     build.number,
                     build.head));
-            sender.sendMessage(String.format(ChatColor.GRAY + "Compiled on " + ChatColor.GOLD + "%s" + ChatColor.GRAY + " by " + ChatColor.GOLD + "%s" + ChatColor.GRAY + ".",
-                    build.date,
-                    build.author));
-            sender.sendMessage(ChatColor.GRAY + "Go to " + ChatColor.GOLD + "https://github.com/unravld/converse" + ChatColor.GRAY + " for more info.");
+            sender.sendMessage(String
+                    .format(ChatColor.GRAY + "Compiled on " + ChatColor.GOLD + "%s" + ChatColor.GRAY + " by " +
+                                    ChatColor.GOLD + "%s" + ChatColor.GRAY + ".",
+                            build.date,
+                            build.author));
+            sender.sendMessage(ChatColor.GRAY + "Go to " + ChatColor.GOLD + "https://github.com/unravld/converse" +
+                    ChatColor.GRAY + " for more info.");
             return true;
         }
         switch (args[0].toLowerCase()) {
@@ -41,7 +44,9 @@ public class Converse extends CommandBase {
                 } else {
                     sender.sendMessage(ChatColor.GRAY + "You aren't staff.");
                 }
-                sender.sendMessage(ChatColor.GRAY + "User directory: " + plugin.getDataFolder() + File.separator + "players" + File.separator + player.getName() + ".yml");
+                sender.sendMessage(
+                        ChatColor.GRAY + "User directory: " + plugin.getDataFolder() + File.separator + "players" +
+                                File.separator + player.getName() + ".yml");
                 return true;
             }
             case "reload": {

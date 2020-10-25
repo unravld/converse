@@ -3,5 +3,5 @@ version: ${project.version}
 description: Core plugin for player commands and moderator tools.
 author: Unraveled
 main: net.unraveled.ConversePlugin
-depend: [LuckPerms]
+depend: [ LuckPerms ]
 api-version: 1.16

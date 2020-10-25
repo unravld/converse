@@ -72,9 +72,11 @@ public class Mode extends CommandBase {
             }
         }
         sender.sendMessage(ChatColor.GRAY + "Available server modes:");
-        sender.sendMessage(ChatColor.GOLD + "Dev: " + ChatColor.GRAY + "Plugin testing status for leadership and developers.");
+        sender.sendMessage(
+                ChatColor.GOLD + "Dev: " + ChatColor.GRAY + "Plugin testing status for leadership and developers.");
         sender.sendMessage(ChatColor.GOLD + "Staff: " + ChatColor.GRAY + "Restricts the server to staff members only.");
-        sender.sendMessage(ChatColor.GOLD + "Event: " + ChatColor.GRAY + "Whitelist all online players and closes the server.");
+        sender.sendMessage(
+                ChatColor.GOLD + "Event: " + ChatColor.GRAY + "Whitelist all online players and closes the server.");
         sender.sendMessage(ChatColor.GOLD + "Default: " + ChatColor.GRAY + "Normal server functionality.");
         sender.sendMessage(ChatColor.GRAY + "The server is currently running in " + mode + " mode.");
         return true;

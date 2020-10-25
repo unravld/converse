@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
 public class Playtime extends CommandBase {
     @SuppressWarnings("deprecated")
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(args.length == 0) {
-            if(sender instanceof Player) {
+        if (args.length == 0) {
+            if (sender instanceof Player) {
                 plugin.ptl.cachePlayerPlaytime((Player) sender);
                 PlayerData pData = plugin.playerDataManager.getPlayerData(((Player) sender));
                 sender.sendMessage(ChatColor.GRAY + "Your playtime: " + ChatColor.GRAY +
@@ -28,10 +28,10 @@ public class Playtime extends CommandBase {
             }
         } else {
             Player target = Bukkit.getPlayer(args[0]);
-            if(target != null) {
+            if (target != null) {
                 plugin.ptl.cachePlayerPlaytime(target);
                 PlayerData pData = plugin.playerDataManager.getPlayerData((target));
-                sender.sendMessage(ChatColor.GRAY + target.getName()+ "'s playtime: " + ChatColor.GOLD +
+                sender.sendMessage(ChatColor.GRAY + target.getName() + "'s playtime: " + ChatColor.GOLD +
                         formattedTime(pData.getPlaytime()));
             } else {
                 OfflinePlayer offlineTarget = Bukkit.getOfflinePlayer(args[0]);

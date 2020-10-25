@@ -19,7 +19,7 @@ import java.util.Date;
 @CommandParameters(description = "Bans a player for a day.", usage = "/<command> <player> [reason] [-r]", aliases = "dayban, gtfo")
 public class Dban extends CommandBase {
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[]args){
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!sender.hasPermission("converse.dban")) {
             sender.sendMessage(Messages.NO_PERMISSION);
             return true;

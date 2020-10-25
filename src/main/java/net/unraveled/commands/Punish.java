@@ -30,11 +30,13 @@ public class Punish extends CommandBase {
         }
         if (Punisher.getA().containsKey(player)) {
             Punisher.removeFromA(player);
-            sender.sendMessage(ChatColor.GRAY + Objects.requireNonNull(player).getName() + " has been removed from the punishment list.");
+            sender.sendMessage(ChatColor.GRAY + Objects.requireNonNull(player).getName() +
+                    " has been removed from the punishment list.");
             return true;
         }
         Punisher.addToA(player, type);
-        sender.sendMessage(ChatColor.GRAY + Objects.requireNonNull(player).getName() + " has been added to the punishment list with type " + type + ".");
+        sender.sendMessage(ChatColor.GRAY + Objects.requireNonNull(player).getName() +
+                " has been added to the punishment list with type " + type + ".");
         return true;
     }
 }

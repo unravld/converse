@@ -8,12 +8,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class BanSystem extends ConverseBase {
-    private static final ArrayList<AbstractBan> bans = new ArrayList<>();
+    private final ArrayList<AbstractBan> bans = new ArrayList<>();
 
     // Constructor
     public BanSystem() {
@@ -21,6 +20,7 @@ public class BanSystem extends ConverseBase {
 
     /**
      * Gets the bans loaded from the ban folder.
+     *
      * @return An array of AbstractBan objects.
      */
     public ArrayList<AbstractBan> getBans() {
@@ -29,6 +29,7 @@ public class BanSystem extends ConverseBase {
 
     /**
      * Adds an AbstractBan object to the array.
+     *
      * @param ban The AbstractBan (SimpleBan) object to add to the ban list.
      */
     public void addBan(AbstractBan ban) {
@@ -37,14 +38,16 @@ public class BanSystem extends ConverseBase {
 
     /**
      * Removes an AbstractBan object from the array.
+     *
      * @param ban The AbstractBan object to remove.
      */
     public void removeBan(AbstractBan ban) {
-        if (bans.contains(ban)) bans.remove(ban);
+        bans.remove(ban);
     }
 
     /**
      * Saves an AbstractBan object to the current List, and creates a new file, if necessary.
+     *
      * @param ban
      */
     public void save(AbstractBan ban) {
@@ -53,6 +56,10 @@ public class BanSystem extends ConverseBase {
         addBan(ban);
     }
 
+    /**
+     * @param fileName
+     * @return
+     */
     public AbstractBan load(String fileName) {
         FileUtils banFile = new FileUtils(fileName + ".ban", "bans");
         if (!banFile.getFile().exists()) {
@@ -62,12 +69,19 @@ public class BanSystem extends ConverseBase {
         return new BanSerializer(banFile.read()).deserialize();
     }
 
+    /**
+     * @param fileName
+     * @return
+     */
     public boolean deleteBan(String fileName) {
         FileUtils banFile = new FileUtils(fileName + ".ban", "bans");
         getBans().remove(new BanSerializer(banFile.read()).deserialize());
         return banFile.getFile().delete();
     }
 
+    /**
+     *
+     */
     public void loadAll() {
         File file = new File(plugin.getDataFolder(), "bans");
         if (!file.exists()) {
@@ -86,6 +100,10 @@ public class BanSystem extends ConverseBase {
         }
     }
 
+    /**
+     * @param ban
+     * @return
+     */
     public String generate(AbstractBan ban) {
         StringBuilder sb = new StringBuilder();
         sb.append(ChatColor.GRAY + "You are banned!\n");
@@ -97,7 +115,11 @@ public class BanSystem extends ConverseBase {
         return sb.toString();
     }
 
-    public static boolean isBanned(String playerName) {
+    /**
+     * @param playerName
+     * @return
+     */
+    public boolean isBanned(String playerName) {
         for (AbstractBan ban : bans) {
             if (ban.getName().equalsIgnoreCase(playerName)) {
                 return true;
@@ -106,7 +128,11 @@ public class BanSystem extends ConverseBase {
         return false;
     }
 
-    public static boolean isBanned(UUID uuid) {
+    /**
+     * @param uuid
+     * @return
+     */
+    public boolean isBanned(UUID uuid) {
         for (AbstractBan ban : bans) {
             if (ban.getUuid().equals(uuid)) {
                 return true;
@@ -115,7 +141,11 @@ public class BanSystem extends ConverseBase {
         return false;
     }
 
-    public static boolean isBanned(Player player) {
+    /**
+     * @param player
+     * @return
+     */
+    public boolean isBanned(Player player) {
         for (AbstractBan ban : bans) {
             if (Bukkit.getOfflinePlayer(ban.getUuid()).equals(player)) {
                 return true;
@@ -125,5 +155,45 @@ public class BanSystem extends ConverseBase {
             }
         }
         return false;
+    }
+
+    /**
+     * Locates the ban in relation to a players uuid.
+     *
+     * @param uuid
+     * @return
+     */
+    public AbstractBan find(UUID uuid) {
+        return getBans().stream().filter(ban -> ban.getUuid().equals(uuid)).findFirst().orElse(null);
+    }
+
+    /**
+     * Locates the ban in relation to the players Ban ID.
+     *
+     * @param banId
+     * @return
+     */
+    public AbstractBan find(String banId) {
+        for (AbstractBan ban : getBans()) {
+            String temp = ban.getBanId().split("-")[1];
+            if (ban.getBanId().equals(banId) || temp.equals(banId)) {
+                return ban;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param uuid
+     * @param newName
+     * @return
+     */
+    public boolean mark(UUID uuid, String newName) {
+        AbstractBan ban = find(uuid);
+        if (ban != null) {
+            FileUtils util = new FileUtils(ban.getName() + ".ban", "bans");
+            FileUtils newUtil = new FileUtils(newName + ".ban", "bans");
+            return util.getFile().renameTo(newUtil.getFile());
+        } else return false;
     }
 }
