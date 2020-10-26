@@ -20,7 +20,7 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class ManageListener extends ConverseBase implements Listener {
-    public ManageListener(ConversePlugin plugin) {
+    public ManageListener() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

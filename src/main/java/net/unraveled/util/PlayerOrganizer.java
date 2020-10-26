@@ -10,9 +10,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class PlayerOrganizer extends Container {
+public class PlayerOrganizer extends ConverseBase {
     //TabList Sorting Methods
-    private final LuckPermsBridge LPB = getPlugin().lp;
+    private final LuckPermsBridge LPB = plugin.lp;
     private final Scoreboard sb;
     final Team op;
     final Team voter;

@@ -1,5 +1,8 @@
 package net.unraveled.util;
 
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.unraveled.ConversePlugin;
 import net.unraveled.playerdata.PlayerData;
 import org.bukkit.Bukkit;
@@ -23,6 +26,7 @@ public class Util extends ConverseBase {
     private static long unix;
     private static Date date;
     private static UUID uuid;
+    private static final ColorConversion converter = new ColorConversion();
 
 
     /**
@@ -138,6 +142,29 @@ public class Util extends ConverseBase {
     public static void removeStaffChat(UUID uuid) {
         Util.uuid = uuid;
         staffChat.remove(uuid);
+    }
+
+    public static void hoverChat(Player player, ChatColor chatColor, String chatMessage, String hoverMessage) {
+        net.md_5.bungee.api.ChatColor bColor = converter.convert(chatColor);
+
+        TextComponent comp = new TextComponent(chatMessage);
+        comp.setColor(bColor);
+        comp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hoverMessage)
+                .color(net.md_5.bungee.api.ChatColor.WHITE)
+                .create()));
+        player.spigot().sendMessage(comp);
+    }
+
+    public static void hoverChat(Player player, ChatColor chatColor, ChatColor hoverColor, String chatMessage, String hoverMessage) {
+        net.md_5.bungee.api.ChatColor bColor = converter.convert(chatColor);
+        net.md_5.bungee.api.ChatColor bColor2 = converter.convert(hoverColor);
+
+        TextComponent comp = new TextComponent(chatMessage);
+        comp.setColor(bColor);
+        comp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hoverMessage)
+                .color(bColor2)
+                .create()));
+        player.spigot().sendMessage(comp);
     }
 
     public static Boolean isInStaffChat(UUID uuid) {

@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
@@ -15,24 +16,28 @@ import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class PlayerDataManager extends ConverseBase {
     private final Map<UUID, PlayerData> loadedData = new HashMap<>();
     public final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public final BukkitTask scheduler;
+    public final BukkitScheduler scheduler = Bukkit.getScheduler();
 
     public PlayerDataManager() {
         File playersFolder = new File(plugin.getDataFolder(), "players");
         //noinspection ResultOfMethodCallIgnored
         playersFolder.mkdirs();
 
-        scheduler = new BukkitRunnable() {
-            public void run() {
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (loadedData.containsKey(p.getUniqueId())) save(loadedData.get(p.getUniqueId()));
-                }
+        scheduler.runTaskTimerAsynchronously(plugin, (new Task()), 6000L, 6000L);
+    }
+
+    private class Task implements Consumer<BukkitTask> {
+        @Override
+        public void accept(BukkitTask task) {
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (loadedData.containsKey(p.getUniqueId())) save(loadedData.get(p.getUniqueId()));
             }
-        }.runTaskTimerAsynchronously(plugin, 6000L, 6000L);
+        }
     }
 
     public PlayerData getPlayerData(UUID uuid) {

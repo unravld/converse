@@ -108,7 +108,7 @@ public class BanSystem extends ConverseBase {
         StringBuilder sb = new StringBuilder();
         sb.append(ChatColor.GRAY + "You are banned!\n");
         sb.append(ChatColor.WHITE + "Reason: " + ChatColor.YELLOW + ban.getBanMessage() + "\n");
-        sb.append(ChatColor.WHITE + "Banned by: " + ChatColor.RED + ban.getPunisher() + "\n");
+        sb.append(ChatColor.WHITE + "Banned by: " + ChatColor.RED + ban.getIssuer() + "\n");
         sb.append(ChatColor.WHITE + "Expiry Date: " + ChatColor.BLUE + ban.getBanExpiry() + "\n");
         sb.append(ChatColor.WHITE + "Ban ID: " + ChatColor.GREEN + ban.getBanId() + "\n");
         sb.append(ChatColor.GOLD + "Appeal at https://www.unraveledmc.com");

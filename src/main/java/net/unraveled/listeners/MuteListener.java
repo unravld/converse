@@ -1,6 +1,7 @@
 package net.unraveled.listeners;
 
 import net.unraveled.ConversePlugin;
+import net.unraveled.util.ConverseBase;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -15,17 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class MuteListener implements Listener {
-    private final ConversePlugin plugin;
-
+public class MuteListener extends ConverseBase implements Listener {
     @SuppressWarnings("")
-    public MuteListener(ConversePlugin plugin) {
-        this.plugin = plugin;
+    public MuteListener() {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     private final List<UUID> muted = new ArrayList<>();
-    private final List<String> blockedCommands = ConversePlugin.plugin.config.getStringList("muted_commands");
+    private final List<String> blockedCommands = plugin.config.getStringList("muted_commands");
 
     public boolean isMuted(Player player) {
         return muted.contains(player.getUniqueId());

@@ -18,7 +18,7 @@ public class BanSerializer extends SerializableObject<AbstractBan> {
         StringBuilder sb = new StringBuilder();
         sb.append("name: " + ban.getName() + "\n");
         sb.append("uuid: " + ban.getUuid() + "\n");
-        sb.append("issuer: " + ban.getPunisher() + "\n");
+        sb.append("issuer: " + ban.getIssuer() + "\n");
         sb.append("expiry: " + (new SimpleDateFormat("dd/MMM/yyyy").format(ban.getBanExpiry())) + "\n");
         sb.append("id: " + ban.getBanId() + "\n");
         sb.append("message: " + ban.getBanMessage());

@@ -2,6 +2,7 @@ package net.unraveled.listeners;
 
 import net.unraveled.ConversePlugin;
 import net.unraveled.api.abstracts.AbstractGUI;
+import net.unraveled.util.ConverseBase;
 import net.unraveled.util.Util;
 import org.bukkit.*;
 import org.bukkit.entity.Item;
@@ -24,12 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class WorldListener extends Container implements Listener {
-    private final ConversePlugin plugin;
+public class WorldListener extends ConverseBase implements Listener {
 
-    public WorldListener(ConversePlugin plugin) {
+    public WorldListener() {
         super();
-        this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -37,13 +36,13 @@ public class WorldListener extends Container implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         //Custom Join Manage
         Player player = event.getPlayer();
-        ChatColor rankColor = getPlugin().lp.displayRankColor(player);
-        ChatColor nameColor = getPlugin().lp.nameColor(player);
-        String rank = getPlugin().lp.displayRank(player);
+        ChatColor rankColor = plugin.lp.displayRankColor(player);
+        ChatColor nameColor = plugin.lp.nameColor(player);
+        String rank = plugin.lp.displayRank(player);
         StringBuilder sb = new StringBuilder();
-        if (getPlugin().lp.isStaff(player.getUniqueId())
-                || getPlugin().lp.isArchitect(player.getUniqueId())
-                || getPlugin().lp.isVoter(player.getUniqueId())) {
+        if (plugin.lp.isStaff(player.getUniqueId())
+                || plugin.lp.isArchitect(player.getUniqueId())
+                || plugin.lp.isVoter(player.getUniqueId())) {
             sb.append(ChatColor.DARK_GRAY + "[").append(ChatColor.GREEN + "+").append(ChatColor.DARK_GRAY + "] ")
                     .append("[").append(rankColor).append(rank).append(ChatColor.DARK_GRAY).append("] ")
                     .append(nameColor).append(player.getName());
@@ -66,13 +65,13 @@ public class WorldListener extends Container implements Listener {
 
         //custom leave
         Player player = event.getPlayer();
-        ChatColor nameColor = getPlugin().lp.nameColor(player);
+        ChatColor nameColor = plugin.lp.nameColor(player);
         String sb = ChatColor.DARK_GRAY + "[" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " +
                 nameColor + player.getName();
         event.setQuitMessage(sb);
     }
 
-    public final boolean isDropsAllowed = getPlugin().config.getBoolean("item_drops");
+    public final boolean isDropsAllowed = plugin.config.getBoolean("item_drops");
 
     @EventHandler
     public void PlayerDrops(PlayerDropItemEvent e) {
@@ -121,13 +120,13 @@ public class WorldListener extends Container implements Listener {
     @EventHandler
     public void BlockPlacement(BlockPlaceEvent event) {
         Material m = event.getBlockPlaced().getType();
-        if (!getPlugin().config.getBoolean("fluid_place")) {
+        if (!plugin.config.getBoolean("fluid_place")) {
             if (mats().contains(m)) {
                 event.setCancelled(true);
             }
         }
 
-        if (!getPlugin().config.getBoolean("fire_place")) {
+        if (!plugin.config.getBoolean("fire_place")) {
             if (m == Material.FIRE) {
                 event.setCancelled(true);
             } else if (m == Material.FIRE_CHARGE) {

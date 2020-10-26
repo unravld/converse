@@ -8,7 +8,7 @@ public interface IBan {
 
     String getName();
 
-    String getPunisher();
+    String getIssuer();
 
     Date getIssueDate();
 

@@ -2,6 +2,7 @@ package net.unraveled.listeners;
 
 import net.unraveled.ConversePlugin;
 import net.unraveled.api.abstracts.AbstractGUI;
+import net.unraveled.util.ConverseBase;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,9 +13,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class ShopListener implements Listener {
+public class ShopListener extends ConverseBase implements Listener {
 
-    public ShopListener(ConversePlugin plugin) {
+    public ShopListener() {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

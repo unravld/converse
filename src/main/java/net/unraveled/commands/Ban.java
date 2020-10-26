@@ -60,6 +60,8 @@ public class Ban extends CommandBase {
                 rollback = true;
             }
 
+            if (reason.isEmpty()) reason = "You have been banned from this server.";
+
             Util.action(sender, "Banning " + player.getName() + (!reason.isEmpty() ? " for: " + reason : ""));
             SimpleBan ban = new SimpleBan((Player) player, sender, expires, BanUUID
                     .newBanID(BanType.TEMPORARY), reason);

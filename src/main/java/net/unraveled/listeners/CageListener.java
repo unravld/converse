@@ -2,6 +2,7 @@ package net.unraveled.listeners;
 
 import net.unraveled.ConversePlugin;
 import net.unraveled.commands.Cage;
+import net.unraveled.util.ConverseBase;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -16,10 +17,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class CageListener implements Listener {
+public class CageListener extends ConverseBase implements Listener {
     public final Map<UUID, Cage.Cager> cages = new HashMap<>();
 
-    public CageListener(ConversePlugin plugin) {
+    public CageListener() {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

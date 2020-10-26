@@ -1,6 +1,7 @@
 package net.unraveled.listeners;
 
 import net.unraveled.ConversePlugin;
+import net.unraveled.util.ConverseBase;
 import net.unraveled.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,12 +14,10 @@ import org.bukkit.event.server.ServerListPingEvent;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ModeListener implements Listener {
-    private final ConversePlugin plugin;
+public class ModeListener extends ConverseBase implements Listener {
 
     @SuppressWarnings("")
-    public ModeListener(ConversePlugin plugin) {
-        this.plugin = plugin;
+    public ModeListener() {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

@@ -1,6 +1,7 @@
 package net.unraveled.listeners;
 
 import net.unraveled.ConversePlugin;
+import net.unraveled.util.ConverseBase;
 import net.unraveled.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -14,10 +15,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatListener implements Listener {
+public class ChatListener extends ConverseBase implements Listener {
     public Util util = ConversePlugin.util;
 
-    public ChatListener(ConversePlugin plugin) {
+    public ChatListener() {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

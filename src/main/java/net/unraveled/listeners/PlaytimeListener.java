@@ -2,6 +2,7 @@ package net.unraveled.listeners;
 
 import net.unraveled.ConversePlugin;
 import net.unraveled.playerdata.PlayerData;
+import net.unraveled.util.ConverseBase;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,33 +10,34 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 
-public class PlaytimeListener implements Listener {
-    public BukkitTask scheduler;
+public class PlaytimeListener extends ConverseBase implements Listener {
+    public BukkitScheduler scheduler = Bukkit.getScheduler();
     public final Map<UUID, Long> timeLoggedIn = new HashMap<>();
-    private final ConversePlugin plugin;
 
-    public PlaytimeListener(ConversePlugin plugin) {
-        this.plugin = plugin;
+    public PlaytimeListener() {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
-
-        beginScheduler();
+        scheduler.runTaskTimerAsynchronously(plugin, (new Task()), 0L, 6000L);
     }
 
-    private void beginScheduler() {
-        scheduler = new BukkitRunnable() {
-            public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    cachePlayerPlaytime(player);
-                }
+    /**
+     * A private task to execute from the scheduler.
+     */
+    private class Task implements Consumer<BukkitTask> {
+        @Override
+        public void accept(BukkitTask bukkitTask) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                cachePlayerPlaytime(player);
             }
-        }.runTaskTimerAsynchronously(plugin, 0L, 6000L);
+        }
     }
 
     public void cachePlayerPlaytime(Player player) {

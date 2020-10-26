@@ -38,7 +38,7 @@ public class SimpleBan extends AbstractBan {
     }
 
     @Override
-    public String getPunisher() {
+    public String getIssuer() {
         return sender;
     }
 

@@ -38,7 +38,6 @@ public class ConversePlugin extends JavaPlugin {
     public LuckPermsBridge lp;
     // Shop
     public ShopListener shl;
-    public Punisher af;
     // Listeners
     public BanListener bl;
     public ChatListener cl;
@@ -71,7 +70,6 @@ public class ConversePlugin extends JavaPlugin {
         bans.loadAll();
         // Config
         registerConfigs();
-        af = new Punisher(this);
         // BuildProperties
         build.load(this);
         server.getScheduler().runTaskTimer(this, (new Recurrent()), 20L * 60L, 20L * 60L);
@@ -109,12 +107,6 @@ public class ConversePlugin extends JavaPlugin {
             cage.undo();
         }
         cgl.cages.clear();
-
-        // Playtime Handler
-        ptl.scheduler.cancel();
-
-        // Player Data Handler
-        playerDataManager.scheduler.cancel();
     }
 
     @Override
@@ -132,17 +124,17 @@ public class ConversePlugin extends JavaPlugin {
     }
 
     private void registerListeners() {
-        bl = new BanListener(this);
-        cl = new ChatListener(this);
-        ml = new ModeListener(this);
-        mul = new MuteListener(this);
-        pdl = new PlayerDataListener(this);
-        sl = new TabListener(this);
-        wl = new WorldListener(this);
-        shl = new ShopListener(this);
-        cgl = new CageListener(this);
-        ptl = new PlaytimeListener(this);
-        mgrl = new ManageListener(this);
+        bl = new BanListener();
+        cl = new ChatListener();
+        ml = new ModeListener();
+        mul = new MuteListener();
+        pdl = new PlayerDataListener();
+        sl = new TabListener();
+        wl = new WorldListener();
+        shl = new ShopListener();
+        cgl = new CageListener();
+        ptl = new PlaytimeListener();
+        mgrl = new ManageListener();
     }
 
     public void registerConfigs() {

@@ -43,7 +43,7 @@ public class Staff extends CommandBase {
                 }
 
                 if (args[2].equalsIgnoreCase("moderator") || args[2].equalsIgnoreCase("mod")) {
-                    plugin.lp.set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.mod"));
+                    plugin.lp.set(player.getUniqueId(), plugin.config.getString("permissions.mod"));
                     Util.action(sender, "Adding " + player.getName() + " to Mod");
                     return true;
                 } else if (args[2].equalsIgnoreCase("administrator") || args[2].equalsIgnoreCase("admin")) {
@@ -51,7 +51,7 @@ public class Staff extends CommandBase {
                         sender.sendMessage(Messages.NO_PERMISSION);
                         return true;
                     }
-                    plugin.lp.set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.admin"));
+                    plugin.lp.set(player.getUniqueId(), plugin.config.getString("permissions.admin"));
                     Util.action(sender, "Adding " + player.getName() + " to Admin");
                     return true;
                 } else if (args[2].equalsIgnoreCase("developer") || args[2].equalsIgnoreCase("dev")) {
@@ -60,7 +60,7 @@ public class Staff extends CommandBase {
                         return true;
                     }
                     plugin.lp
-                            .set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.developer"));
+                            .set(player.getUniqueId(), plugin.config.getString("permissions.developer"));
                     Util.action(sender, "Adding " + player.getName() + " to Developer");
                     return true;
                 } else if (args[2].equalsIgnoreCase("executive") || args[2].equalsIgnoreCase("exec")) {
@@ -69,7 +69,7 @@ public class Staff extends CommandBase {
                         return true;
                     }
                     plugin.lp
-                            .set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.executive"));
+                            .set(player.getUniqueId(), plugin.config.getString("permissions.executive"));
                     Util.action(sender, "Adding " + player.getName() + " to Executive");
                     return true;
                 } else if (args[2].equalsIgnoreCase("architect") || args[2].equalsIgnoreCase("arch")) {
@@ -78,7 +78,7 @@ public class Staff extends CommandBase {
                         return true;
                     }
                     plugin.lp
-                            .set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.architect"));
+                            .set(player.getUniqueId(), plugin.config.getString("permissions.architect"));
                     Util.action(sender, "Adding " + player.getName() + " to Architect");
                     return true;
                 } else {
@@ -103,7 +103,7 @@ public class Staff extends CommandBase {
                     return true;
                 }
 
-                plugin.lp.set(player.getUniqueId(), ConversePlugin.plugin.config.getString("permissions.op"));
+                plugin.lp.set(player.getUniqueId(), plugin.config.getString("permissions.op"));
                 Util.action(sender, "Removing " + player.getName() + " from staff");
                 return true;
             }

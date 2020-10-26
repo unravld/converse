@@ -51,16 +51,15 @@ public class Permban extends CommandBase {
                 rollback = true;
             }
 
-            if (reason.isEmpty()) {
-                reason = "Not Otherwise Specified";
-            }
+            if (reason.isEmpty()) reason = "Not Otherwise Specified";
+
             SimpleBan ban = new SimpleBan((Player) player, sender, null, BanUUID.newBanID(BanType.PERMANENT), reason);
             plugin.bans.addBan(ban);
             Util.action(sender,
                     "Permanently banning " + player.getName() + (!reason.isEmpty() ? " for: " + reason : ""));
             if (player.isOnline()) {
                 Player p = Bukkit.getPlayer(player.getUniqueId());
-                if (p != null) p.kickPlayer(ban.getBanMessage());
+                if (p != null) p.kickPlayer(plugin.bans.generate(ban));
             }
 
             if (rollback) Bukkit.dispatchCommand(sender, "co rb u:" + player.getName() + " t:24h r:global");

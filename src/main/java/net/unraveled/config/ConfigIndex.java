@@ -1,5 +1,6 @@
 package net.unraveled.config;
 
+import net.unraveled.util.ConverseBase;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -10,9 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ConfigIndex {
+public class ConfigIndex extends ConverseBase {
     public static void createDefaultConfiguration(final String fileName) {
-        final File targetFile = new File(new Container().getPlugin().getDataFolder(), fileName);
+        final File targetFile = new File(plugin.getDataFolder(), fileName);
 
         if (targetFile.exists()) {
             return;
@@ -21,7 +22,7 @@ public class ConfigIndex {
         Bukkit.getLogger().info("Installing default configuration file template: " + targetFile.getPath());
 
         try {
-            final InputStream inputStream = new Container().getPlugin().getResource(fileName);
+            final InputStream inputStream = plugin.getResource(fileName);
             FileUtils.copyInputStreamToFile(Objects.requireNonNull(inputStream), targetFile);
             inputStream.close();
         } catch (IOException ex) {
@@ -69,7 +70,7 @@ public class ConfigIndex {
     @SuppressWarnings("unchecked")
     public static Map<String, Boolean> getSavedFlags() {
         Map<String, Boolean> flags = null;
-        File input = new File(new Container().getPlugin().getDataFolder(), "flags.yml");
+        File input = new File(plugin.getDataFolder(), "flags.yml");
         if (input.exists()) {
             try {
                 FileInputStream inputStream = new FileInputStream(input);
@@ -109,8 +110,7 @@ public class ConfigIndex {
         flags.put(flag, value);
 
         try {
-            final FileOutputStream outputStream = new FileOutputStream((new File(new Container().getPlugin()
-                    .getDataFolder(), "flags.yml")));
+            final FileOutputStream outputStream = new FileOutputStream((new File(plugin.getDataFolder(), "flags.yml")));
             final ObjectOutputStream objectStream = new ObjectOutputStream(outputStream);
             objectStream.writeObject(flags);
             objectStream.close();

@@ -19,11 +19,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class TabListener extends ConverseBase implements Listener {
-    private final ConversePlugin plugin;
     private final Tabbed tabbed;
 
-    public TabListener(ConversePlugin plugin) {
-        this.plugin = plugin;
+    public TabListener() {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         EventBus eventBus = api.getEventBus();
         eventBus.subscribe(NodeMutateEvent.class, this::onGroupChange);

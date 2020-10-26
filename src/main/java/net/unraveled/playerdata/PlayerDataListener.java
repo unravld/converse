@@ -16,7 +16,7 @@ import java.util.Objects;
 public class PlayerDataListener extends ConverseBase implements Listener {
     private final PlayerDataManager mgr;
 
-    public PlayerDataListener(ConversePlugin plugin) {
+    public PlayerDataListener() {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         mgr = plugin.playerDataManager;
     }
