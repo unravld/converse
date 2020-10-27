@@ -1,9 +1,11 @@
 package net.unraveled.playerdata;
 
 import net.unraveled.ConversePlugin;
+import net.unraveled.api.abstracts.AbstractBan;
 import net.unraveled.commands.Manage;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -16,6 +18,7 @@ public class PlayerData {
     private long playtime;
     private Date lastLoggedIn;
     private Manage.ManagedSettings managedSettings;
+    private ArrayList<AbstractBan> bans = new ArrayList<>();
 
     public PlayerData(Player player) {
         this.UUID = player.getUniqueId();
@@ -53,7 +56,7 @@ public class PlayerData {
         this.lastKnownName = lastKnownName;
     }
 
-    public void setUUID(java.util.UUID UUID) {
+    public void setUUID(UUID UUID) {
         this.UUID = UUID;
     }
 
@@ -81,7 +84,11 @@ public class PlayerData {
         return ip;
     }
 
-    public java.util.UUID getUUID() {
+    public UUID getUUID() {
         return UUID;
+    }
+
+    public ArrayList<AbstractBan> getBans() {
+        return bans;
     }
 }

@@ -6,6 +6,7 @@ import net.unraveled.bans.BanType;
 import net.unraveled.bans.BanUUID;
 import net.unraveled.bans.SimpleBan;
 import net.unraveled.commands.loader.Messages;
+import net.unraveled.playerdata.PlayerData;
 import net.unraveled.util.Util;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -66,6 +67,10 @@ public class Ban extends CommandBase {
             SimpleBan ban = new SimpleBan((Player) player, sender, expires, BanUUID
                     .newBanID(BanType.TEMPORARY), reason);
             plugin.bans.addBan(ban);
+
+            PlayerData playerData = plugin.playerDataManager.getPlayerData(player.getUniqueId());
+            playerData.getBans().add(ban);
+
             if (player.isOnline()) {
                 Player p = Bukkit.getPlayer(player.getUniqueId());
                 if (p != null) p.kickPlayer(plugin.bans.generate(ban));

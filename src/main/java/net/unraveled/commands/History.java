@@ -1,5 +1,6 @@
 package net.unraveled.commands;
 
+import net.unraveled.api.abstracts.AbstractBan;
 import net.unraveled.api.abstracts.CommandBase;
 import net.unraveled.api.annotations.CommandParameters;
 import net.unraveled.commands.loader.Messages;
@@ -43,25 +44,24 @@ public class History extends CommandBase {
         }
 
         StringBuilder sb = new StringBuilder();
-        ArrayList<BanData> reversedBans = new ArrayList<>(pData.getBans());
+        ArrayList<AbstractBan> reversedBans = new ArrayList<>(pData.getBans());
         Collections.reverse(reversedBans);
-        for (BanData ban : reversedBans) {
-            sb.append(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "#").append(ban.getBanID())
+        for (AbstractBan ban : reversedBans) {
+            sb.append(ChatColor.DARK_GRAY + "[" + ChatColor.GOLD + "#").append(ban.getBanId())
                     .append(ChatColor.DARK_GRAY).append("]");
             sb.append("\n");
-            sb.append(ChatColor.GRAY + "Staffmember: " + ChatColor.GOLD)
-                    .append(ban.getStaffUUID() != null ? Bukkit.getOfflinePlayer(ban.getStaffUUID())
+            sb.append(ChatColor.GRAY + "Issuer: " + ChatColor.GOLD)
+                    .append(ban.getIssuer() != null ? Bukkit.getOfflinePlayer(ban.getIssuer())
                             .getName() : "CONSOLE");
             sb.append("\n");
             sb.append(ChatColor.GRAY + "Expiration: " + ChatColor.GOLD)
-                    .append(ban.getBanType() != BanType.PERMANENT ? plugin.banManager
-                            .formatDate(ban.getBanExpiration()) : "Never");
+                    .append(!ban.getBanId().startsWith("P") ? ban.getBanExpiry().toString() : "Never");
             sb.append("\n");
             sb.append(ChatColor.GRAY + "Issued upon: " + ChatColor.GOLD)
-                    .append(plugin.banManager.formatDate(ban.getDateIssued()));
+                    .append(ban.getIssueDate().toString());
             sb.append("\n");
             sb.append(ChatColor.GRAY + "Reason: " + ChatColor.GOLD)
-                    .append(ban.getReason() != null ? ban.getReason() : "No reason");
+                    .append(ban.getBanMessage() != null ? ban.getBanMessage() : "No reason");
             sb.append("\n");
         }
 

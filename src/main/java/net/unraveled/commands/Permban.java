@@ -6,6 +6,7 @@ import net.unraveled.bans.BanType;
 import net.unraveled.bans.BanUUID;
 import net.unraveled.bans.SimpleBan;
 import net.unraveled.commands.loader.Messages;
+import net.unraveled.playerdata.PlayerData;
 import net.unraveled.util.Util;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -55,6 +56,10 @@ public class Permban extends CommandBase {
 
             SimpleBan ban = new SimpleBan((Player) player, sender, null, BanUUID.newBanID(BanType.PERMANENT), reason);
             plugin.bans.addBan(ban);
+
+            PlayerData playerData = plugin.playerDataManager.getPlayerData(player.getUniqueId());
+            playerData.getBans().add(ban);
+
             Util.action(sender,
                     "Permanently banning " + player.getName() + (!reason.isEmpty() ? " for: " + reason : ""));
             if (player.isOnline()) {
