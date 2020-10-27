@@ -10,6 +10,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 @CommandParameters(description = "Makes a player's chat messages show up in black.", usage = "/<command> <player>", aliases = "darkchat, graychat")
 public class BlackChat extends CommandBase {
     @Override
@@ -29,13 +31,11 @@ public class BlackChat extends CommandBase {
             return true;
         }
 
-        if (!ChatListener.isPunished(player)) {
-            ChatListener.setPunished(player, true);
-            sender.sendMessage(ChatColor.GRAY + "Turning on black chat for " + player.getName() + ".");
-        } else {
-            ChatListener.setPunished(player, false);
-            sender.sendMessage(ChatColor.GRAY + "Turning off black chat for " + player.getName() + ".");
-        }
+        ChatListener.setPunished(player, !ChatListener.isPunished(player));
+        sender.sendMessage(ChatColor.GRAY + "Turning "
+                + (ChatListener.isPunished(player) ? "on" : "off")
+                + " black chat for " + player.getName() + ".");
+
         return true;
     }
 }

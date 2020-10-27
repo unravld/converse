@@ -33,23 +33,9 @@ public abstract class CommandBase implements ICommand {
         return JavaPlugin.getPlugin(ConversePlugin.class);
     }
 
+    @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String lbl, String[] args) {
-        LinkedList<String> gooberwacc = new LinkedList<>();
-        String command = cmd.getName().toLowerCase();
-        String playerInput = lbl.toLowerCase();
-        Character a = playerInput.charAt(0);
-        Character b = command.charAt(0);
-
-        if (command.startsWith(playerInput)) {
-            gooberwacc.add(cmd.getName());
-        } else if (command.startsWith(a.toString())) {
-            gooberwacc.add(cmd.getName());
-        } else if (playerInput.startsWith(b.toString())) {
-            gooberwacc.add(cmd.getName());
-        }
-
-        Bukkit.getOnlinePlayers().forEach(p -> gooberwacc.add(p.getName()));
-        return gooberwacc;
+        return Bukkit.getOnlinePlayers().stream().map(HumanEntity::getName).collect(Collectors.toList());
     }
 
     public Player getPlayer(final String partial) {
