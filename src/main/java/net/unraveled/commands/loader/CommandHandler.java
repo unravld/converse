@@ -8,7 +8,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommandHandler extends ConverseBase {
     public static final String COMMAND_PATH = plugin.reflect.getLocation();
@@ -51,5 +56,30 @@ public class CommandHandler extends ConverseBase {
         }
 
         return true;
+    }
+
+    public static List<String> tabComplete(CommandSender sender, Command cmd, String lbl, String[] args) {
+        final CommandBase base;
+        try {
+            final ClassLoader loader = ConversePlugin.class.getClassLoader();
+            base = (CommandBase) loader.loadClass(COMMAND_PATH + "." + cmd.getName()).newInstance();
+            base.setup(plugin, sender, base.getClass());
+        } catch (Exception ex) {
+            Bukkit.getLogger().severe("Couldn't load command: " + cmd.getName());
+            Bukkit.getLogger().severe(ex.getMessage());
+
+            sender.sendMessage(ChatColor.GRAY + "Couldn't load command: " + cmd.getName());
+            return null;
+        }
+
+        try {
+            return base.onTabComplete(sender, cmd, lbl, args);
+        } catch (Exception ex) {
+            Bukkit.getLogger().severe("Command error: " + lbl);
+            ex.printStackTrace();
+            sender.sendMessage(ChatColor.GRAY + "Command error: " + ex.getMessage());
+        }
+
+        return Bukkit.getOnlinePlayers().stream().map(HumanEntity::getName).collect(Collectors.toList());
     }
 }

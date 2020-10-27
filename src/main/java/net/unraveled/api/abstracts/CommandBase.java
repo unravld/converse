@@ -2,14 +2,18 @@ package net.unraveled.api.abstracts;
 
 import net.unraveled.ConversePlugin;
 import net.unraveled.api.interfaces.ICommand;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class CommandBase implements ICommand {
     protected ConversePlugin plugin;
@@ -27,6 +31,25 @@ public abstract class CommandBase implements ICommand {
     @Override
     public ConversePlugin getPlugin() {
         return JavaPlugin.getPlugin(ConversePlugin.class);
+    }
+
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String lbl, String[] args) {
+        LinkedList<String> gooberwacc = new LinkedList<>();
+        String command = cmd.getName().toLowerCase();
+        String playerInput = lbl.toLowerCase();
+        Character a = playerInput.charAt(0);
+        Character b = command.charAt(0);
+
+        if (command.startsWith(playerInput)) {
+            gooberwacc.add(cmd.getName());
+        } else if (command.startsWith(a.toString())) {
+            gooberwacc.add(cmd.getName());
+        } else if (playerInput.startsWith(b.toString())) {
+            gooberwacc.add(cmd.getName());
+        }
+
+        Bukkit.getOnlinePlayers().forEach(p -> gooberwacc.add(p.getName()));
+        return gooberwacc;
     }
 
     public Player getPlayer(final String partial) {

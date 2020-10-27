@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -112,6 +113,11 @@ public class ConversePlugin extends JavaPlugin {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String lbl, @NotNull String[] args) {
         return CommandHandler.handle(sender, cmd, lbl, args);
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String lbl, String[] args) {
+        return CommandHandler.tabComplete(sender, cmd, lbl, args);
     }
 
     public static LuckPermsApi getLuckPermsAPI() {
