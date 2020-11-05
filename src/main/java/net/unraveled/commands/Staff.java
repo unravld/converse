@@ -12,6 +12,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @CommandParameters(description = "Manages staffmembers.",
         usage = "/<command> <add <player> <rank> | remove <player>>",
         aliases = "saconfig")
@@ -110,5 +113,37 @@ public class Staff extends CommandBase {
             default:
                 return false;
         }
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+        List<String> temp = new ArrayList<>();
+
+        if (args.length == 1) {
+            if (sender.hasPermission("converse.staff")) {
+                temp.add("add");
+                temp.add("remove");
+                return tabMatcher(args[0], temp);
+            }
+        }
+        if (args.length == 3) {
+            if (args[0].equalsIgnoreCase("add")) {
+                temp.add("mod");
+                if (sender.hasPermission("converse.staff.add.admin")) {
+                    temp.add("admin");
+                }
+                if (sender.hasPermission("converse.staff.add.developer")) {
+                    temp.add("developer");
+                }
+                if (sender.hasPermission("converse.staff.add.executive")) {
+                    temp.add("executive");
+                }
+                if (sender.hasPermission("converse.staff.add.architect")) {
+                    temp.add("architect");
+                }
+                return tabMatcher(args[2], temp);
+            }
+        }
+        return null;
     }
 }

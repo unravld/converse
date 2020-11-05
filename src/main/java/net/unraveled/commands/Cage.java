@@ -13,10 +13,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @CommandParameters(description = "Encages a player.", usage = "/<command> <<player> [block] | purge>")
 public class Cage extends CommandBase {
@@ -55,6 +52,16 @@ public class Cage extends CommandBase {
                 loc.getBlock().setType(previousBlocks.get(loc));
             }
         }
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String lbl, String[] args) {
+        List<String> temp = new ArrayList();
+        if (args.length == 1 && sender.hasPermission("converse.cage")) {
+            temp.add("purge");
+            return tabMatcher(args[0], temp);
+        }
+        return null;
     }
 
     // Usage: /cage <player> [block]

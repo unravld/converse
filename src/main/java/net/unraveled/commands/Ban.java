@@ -18,7 +18,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @CommandParameters(description = "Temporarily bans a player.", usage = "/<command> <player> <duration> [reason] [-r]", aliases = "eban, banip, ebanip, tempban, etempban")
 public class Ban extends CommandBase {
@@ -79,5 +81,15 @@ public class Ban extends CommandBase {
             if (rollback) Bukkit.dispatchCommand(sender, "co rb u:" + player.getName() + " t:24h r:global");
         } else return false;
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String lbl, String[] args) {
+        if (args.length >= 2) {
+            List<String> b = new ArrayList<>();
+            b.add("-r");
+            return tabMatcher(args[args.length - 1], b);
+        }
+        return null;
     }
 }

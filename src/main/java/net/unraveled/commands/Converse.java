@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @CommandParameters(description = "Describes information about Converse.", usage = "/<command> [reload | debug]")
 public class Converse extends CommandBase {
@@ -61,5 +63,17 @@ public class Converse extends CommandBase {
             default:
                 return false;
         }
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String lbl, String[] args) {
+        List<String> temp = new ArrayList<>();
+        if (sender.hasPermission("converse.debug")) {
+            temp.add("debug");
+        }
+        if (sender.hasPermission("converse.reload")) {
+            temp.add("reload");
+        }
+        return tabMatcher(args[0], temp);
     }
 }

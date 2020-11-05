@@ -8,6 +8,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,8 +35,19 @@ public abstract class CommandBase implements ICommand {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command cmd, String lbl, String[] args) {
-        return Bukkit.getOnlinePlayers().stream().map(HumanEntity::getName).collect(Collectors.toList());
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+        return null;
+    }
+
+    public List<String> tabMatcher(final String input, final List<String> matchFrom) {
+        if (input.isEmpty()) return matchFrom;
+        List<String> temp = new ArrayList<>();
+        matchFrom.stream().forEachOrdered(temp_1 -> {
+            if (temp_1.toLowerCase().startsWith(input.toLowerCase())) {
+                temp.add(temp_1);
+            }
+        });
+        return temp;
     }
 
     public Player getPlayer(final String partial) {
